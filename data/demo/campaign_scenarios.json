@@ -1,0 +1,547 @@
+{
+  "promotional": [
+    {
+      "id": "8a35a9db-deb7-4f9a-890f-c171a7be6255",
+      "name": "Black Friday 2026 - Flash Sale",
+      "type": "promotional",
+      "target_audience": [
+        "high-value",
+        "medium-value"
+      ],
+      "content": {
+        "id": "231150e8-41ec-4147-b263-782d7f9f66d5",
+        "name": "black_friday_flash_sale",
+        "content": "\ud83c\udf89 BLACK FRIDAY EXCLUSIVE! Get 50% OFF on all premium products. Limited time only - Shop now before midnight! Use code: BF2026",
+        "placeholders": [
+          "discount_percentage",
+          "promo_code",
+          "expiry_time"
+        ],
+        "channel_variants": {
+          "sms": "BLACK FRIDAY! 50% OFF with code BF2026. Shop now: [link]",
+          "email": "\ud83c\udf89 BLACK FRIDAY EXCLUSIVE!\n\nDear Valued Customer,\n\nGet ready for our biggest sale of the year! Enjoy 50% OFF on all premium products.\n\n\u2728 Limited Time Offer\n\u23f0 Ends at Midnight\n\ud83c\udf81 Use Code: BF2026\n\nShop Now: [link]\n\nHappy Shopping!",
+          "whatsapp": "\ud83c\udf89 BLACK FRIDAY ALERT!\n\nHey! Our biggest sale is LIVE!\n\n\ud83d\udca5 50% OFF Everything\n\u23f0 Ends Tonight at Midnight\n\ud83c\udf81 Code: BF2026\n\nShop here: [link]",
+          "voice": "Hello! This is a special Black Friday announcement. Get fifty percent off all premium products today only. Use promo code B F 2 0 2 6 at checkout."
+        },
+        "brand_profile": {
+          "brand_name": "AI-CPaaS Demo Brand",
+          "voice_tone": "professional-friendly",
+          "key_messages": [
+            "Customer satisfaction is our priority",
+            "Innovation meets reliability",
+            "Your trusted partner"
+          ],
+          "prohibited_words": [
+            "cheap",
+            "spam",
+            "scam",
+            "fake"
+          ],
+          "style_guidelines": {
+            "emoji_usage": "moderate",
+            "formality": "professional-casual",
+            "personalization": "high"
+          }
+        }
+      },
+      "constraints": {
+        "max_budget": 50000.0,
+        "start_time": "2026-01-19T10:07:09.956822",
+        "end_time": "2026-01-20T10:07:09.957868",
+        "excluded_channels": [],
+        "target_segments": [
+          "high-value",
+          "medium-value"
+        ],
+        "respect_fatigue_limits": true,
+        "require_guardrail_approval": true
+      },
+      "expected_outcomes": [
+        {
+          "channel": "sms",
+          "engagement_probability": 0.55,
+          "cost_estimate": 7500.0,
+          "expected_roi": 4.2,
+          "confidence": 0.75
+        },
+        {
+          "channel": "whatsapp",
+          "engagement_probability": 0.62,
+          "cost_estimate": 5000.0,
+          "expected_roi": 4.5,
+          "confidence": 0.78
+        },
+        {
+          "channel": "email",
+          "engagement_probability": 0.48,
+          "cost_estimate": 1000.0,
+          "expected_roi": 5.0,
+          "confidence": 0.7
+        }
+      ],
+      "budget_impact": {
+        "total_cost": 15000.0,
+        "cost_per_channel": {
+          "sms": 3750.0,
+          "whatsapp": 2500.0,
+          "email": 500.0,
+          "voice": 8250.0
+        },
+        "savings_vs_spray_pray": 15000.0,
+        "projected_annual_savings": 180000.0,
+        "roi_percentage": 450.0
+      },
+      "created_at": "2026-01-19T10:07:09.957945"
+    },
+    {
+      "id": "b4f909ba-4d41-4562-aa32-3da2d433a6e0",
+      "name": "New Product Launch - Premium Series",
+      "type": "promotional",
+      "target_audience": [
+        "high-value"
+      ],
+      "content": {
+        "id": "3f8b3413-a8ec-4dae-b048-7be1d7a61ebb",
+        "name": "product_launch_premium",
+        "content": "Introducing our NEW Premium Series! Be among the first to experience innovation. Early bird discount: 30% OFF. Reserve yours today!",
+        "placeholders": [
+          "product_name",
+          "discount",
+          "launch_date"
+        ],
+        "channel_variants": {
+          "email": "\ud83d\ude80 EXCLUSIVE LAUNCH INVITATION\n\nDear [Name],\n\nAs one of our valued customers, you're invited to be among the first to experience our NEW Premium Series.\n\n\u2728 What's New:\n\u2022 Advanced features\n\u2022 Premium design\n\u2022 Enhanced performance\n\n\ud83c\udf81 Early Bird Offer: 30% OFF\n\ud83d\udcc5 Limited Availability\n\nReserve Now: [link]",
+          "voice": "Hello, this is an exclusive invitation for our valued customers. We're launching our new Premium Series, and you're invited to get early access with thirty percent off. Visit our website to learn more."
+        },
+        "brand_profile": {
+          "brand_name": "AI-CPaaS Demo Brand",
+          "voice_tone": "professional-friendly",
+          "key_messages": [
+            "Customer satisfaction is our priority",
+            "Innovation meets reliability",
+            "Your trusted partner"
+          ],
+          "prohibited_words": [
+            "cheap",
+            "spam",
+            "scam",
+            "fake"
+          ],
+          "style_guidelines": {
+            "emoji_usage": "moderate",
+            "formality": "professional-casual",
+            "personalization": "high"
+          }
+        }
+      },
+      "constraints": {
+        "max_budget": 30000.0,
+        "start_time": "2026-01-19T10:07:09.957953",
+        "end_time": "2026-01-26T10:07:09.957953",
+        "excluded_channels": [
+          "sms"
+        ],
+        "target_segments": [
+          "high-value"
+        ],
+        "respect_fatigue_limits": true,
+        "require_guardrail_approval": true
+      },
+      "expected_outcomes": [
+        {
+          "channel": "email",
+          "engagement_probability": 0.75,
+          "cost_estimate": 200.0,
+          "expected_roi": 3.8,
+          "confidence": 0.85
+        },
+        {
+          "channel": "voice",
+          "engagement_probability": 0.65,
+          "cost_estimate": 6000.0,
+          "expected_roi": 3.2,
+          "confidence": 0.8
+        }
+      ],
+      "budget_impact": {
+        "total_cost": 8000.0,
+        "cost_per_channel": {
+          "email": 200.0,
+          "voice": 6000.0,
+          "whatsapp": 1800.0
+        },
+        "savings_vs_spray_pray": 12000.0,
+        "projected_annual_savings": 144000.0,
+        "roi_percentage": 380.0
+      },
+      "created_at": "2026-01-19T10:07:09.957966"
+    },
+    {
+      "id": "40c42120-c18e-4965-9cef-16fd19c41b21",
+      "name": "Summer Sale - All Customers",
+      "type": "promotional",
+      "target_audience": [
+        "all"
+      ],
+      "content": {
+        "id": "dd490adb-bbb5-45a3-b154-d09d9a10dda5",
+        "name": "summer_sale",
+        "content": "\u2600\ufe0f SUMMER SALE IS HERE! Enjoy up to 40% OFF on selected items. Refresh your collection today!",
+        "placeholders": [
+          "discount_range",
+          "category"
+        ],
+        "channel_variants": {
+          "sms": "SUMMER SALE! Up to 40% OFF. Shop now: [link]",
+          "whatsapp": "\u2600\ufe0f Summer Sale Alert!\n\nUp to 40% OFF on selected items\n\ud83c\udfd6\ufe0f Perfect time to refresh your collection\n\nBrowse deals: [link]",
+          "email": "\u2600\ufe0f SUMMER SALE IS HERE!\n\nHello,\n\nBeat the heat with our amazing summer deals!\n\n\ud83c\udf0a Up to 40% OFF\n\ud83c\udfd6\ufe0f Selected Items\n\u2600\ufe0f Limited Time\n\nShop Now: [link]"
+        },
+        "brand_profile": {
+          "brand_name": "AI-CPaaS Demo Brand",
+          "voice_tone": "professional-friendly",
+          "key_messages": [
+            "Customer satisfaction is our priority",
+            "Innovation meets reliability",
+            "Your trusted partner"
+          ],
+          "prohibited_words": [
+            "cheap",
+            "spam",
+            "scam",
+            "fake"
+          ],
+          "style_guidelines": {
+            "emoji_usage": "moderate",
+            "formality": "professional-casual",
+            "personalization": "high"
+          }
+        }
+      },
+      "constraints": {
+        "max_budget": 40000.0,
+        "start_time": "2026-01-19T10:07:09.957972",
+        "end_time": "2026-02-02T10:07:09.957972",
+        "excluded_channels": [],
+        "target_segments": [
+          "all"
+        ],
+        "respect_fatigue_limits": true,
+        "require_guardrail_approval": true
+      },
+      "expected_outcomes": [
+        {
+          "channel": "sms",
+          "engagement_probability": 0.55,
+          "cost_estimate": 7500.0,
+          "expected_roi": 4.2,
+          "confidence": 0.75
+        },
+        {
+          "channel": "whatsapp",
+          "engagement_probability": 0.62,
+          "cost_estimate": 5000.0,
+          "expected_roi": 4.5,
+          "confidence": 0.78
+        },
+        {
+          "channel": "email",
+          "engagement_probability": 0.48,
+          "cost_estimate": 1000.0,
+          "expected_roi": 5.0,
+          "confidence": 0.7
+        }
+      ],
+      "budget_impact": {
+        "total_cost": 20000.0,
+        "cost_per_channel": {
+          "sms": 7500.0,
+          "whatsapp": 5000.0,
+          "email": 1000.0,
+          "voice": 6500.0
+        },
+        "savings_vs_spray_pray": 20000.0,
+        "projected_annual_savings": 240000.0,
+        "roi_percentage": 420.0
+      },
+      "created_at": "2026-01-19T10:07:09.957983"
+    }
+  ],
+  "transactional": [
+    {
+      "id": "88546475-208b-4183-9bfb-ad6712414796",
+      "name": "Order Confirmation",
+      "type": "transactional",
+      "target_audience": [
+        "all"
+      ],
+      "content": {
+        "id": "4ce197d5-092b-4639-b65f-bec23e80e1ad",
+        "name": "order_confirmation",
+        "content": "Order confirmed! Your order #[ORDER_ID] has been received and is being processed. Expected delivery: [DELIVERY_DATE]",
+        "placeholders": [
+          "order_id",
+          "delivery_date",
+          "order_total"
+        ],
+        "channel_variants": {
+          "sms": "Order #[ORDER_ID] confirmed! Delivery by [DATE]. Track: [link]",
+          "email": "\u2705 Order Confirmation\n\nThank you for your order!\n\nOrder #: [ORDER_ID]\nTotal: $[AMOUNT]\nExpected Delivery: [DATE]\n\nTrack your order: [link]",
+          "whatsapp": "\u2705 Order Confirmed!\n\nOrder #[ORDER_ID]\n\ud83d\udcb0 Total: $[AMOUNT]\n\ud83d\udce6 Delivery: [DATE]\n\nTrack here: [link]"
+        },
+        "brand_profile": {
+          "brand_name": "AI-CPaaS Demo Brand",
+          "voice_tone": "professional-friendly",
+          "key_messages": [
+            "Customer satisfaction is our priority",
+            "Innovation meets reliability",
+            "Your trusted partner"
+          ],
+          "prohibited_words": [
+            "cheap",
+            "spam",
+            "scam",
+            "fake"
+          ],
+          "style_guidelines": {
+            "emoji_usage": "moderate",
+            "formality": "professional-casual",
+            "personalization": "high"
+          }
+        }
+      },
+      "constraints": {
+        "max_budget": null,
+        "start_time": null,
+        "end_time": null,
+        "excluded_channels": [],
+        "target_segments": [],
+        "respect_fatigue_limits": false,
+        "require_guardrail_approval": false
+      },
+      "expected_outcomes": [],
+      "budget_impact": null,
+      "created_at": "2026-01-19T10:07:09.957996"
+    },
+    {
+      "id": "9d800fe2-72e7-424b-bb63-b283617315dc",
+      "name": "Shipping Update",
+      "type": "transactional",
+      "target_audience": [
+        "all"
+      ],
+      "content": {
+        "id": "8ab5cf04-eab9-4ba6-8ebd-25ea4430b70a",
+        "name": "shipping_update",
+        "content": "\ud83d\udce6 Your order #[ORDER_ID] has shipped! Track your package: [TRACKING_LINK]",
+        "placeholders": [
+          "order_id",
+          "tracking_number",
+          "carrier"
+        ],
+        "channel_variants": {
+          "sms": "Shipped! Order #[ORDER_ID]. Track: [link]",
+          "email": "\ud83d\udce6 Your Order Has Shipped!\n\nOrder #: [ORDER_ID]\nTracking #: [TRACKING]\nCarrier: [CARRIER]\n\nTrack Package: [link]",
+          "whatsapp": "\ud83d\udce6 Package on the way!\n\nOrder #[ORDER_ID]\n\ud83d\ude9a Tracking: [TRACKING]\n\nTrack here: [link]"
+        },
+        "brand_profile": {
+          "brand_name": "AI-CPaaS Demo Brand",
+          "voice_tone": "professional-friendly",
+          "key_messages": [
+            "Customer satisfaction is our priority",
+            "Innovation meets reliability",
+            "Your trusted partner"
+          ],
+          "prohibited_words": [
+            "cheap",
+            "spam",
+            "scam",
+            "fake"
+          ],
+          "style_guidelines": {
+            "emoji_usage": "moderate",
+            "formality": "professional-casual",
+            "personalization": "high"
+          }
+        }
+      },
+      "constraints": {
+        "max_budget": null,
+        "start_time": null,
+        "end_time": null,
+        "excluded_channels": [],
+        "target_segments": [],
+        "respect_fatigue_limits": false,
+        "require_guardrail_approval": false
+      },
+      "expected_outcomes": [],
+      "budget_impact": null,
+      "created_at": "2026-01-19T10:07:09.958007"
+    },
+    {
+      "id": "2d86a534-8f0f-4bf8-8b4c-426dd76fe8fb",
+      "name": "Delivery Confirmation",
+      "type": "transactional",
+      "target_audience": [
+        "all"
+      ],
+      "content": {
+        "id": "8f196c48-46da-4484-a863-8e5cbb6b0764",
+        "name": "delivery_confirmation",
+        "content": "\u2705 Delivered! Your order #[ORDER_ID] was delivered successfully. Enjoy your purchase!",
+        "placeholders": [
+          "order_id",
+          "delivery_time"
+        ],
+        "channel_variants": {
+          "sms": "Delivered! Order #[ORDER_ID]. Enjoy!",
+          "email": "\u2705 Delivery Confirmed\n\nYour order #[ORDER_ID] was delivered at [TIME].\n\nWe hope you love your purchase!\n\nRate your experience: [link]",
+          "whatsapp": "\u2705 Delivered!\n\nOrder #[ORDER_ID]\n\ud83d\udccd Delivered at [TIME]\n\nHow was your experience? [link]"
+        },
+        "brand_profile": {
+          "brand_name": "AI-CPaaS Demo Brand",
+          "voice_tone": "professional-friendly",
+          "key_messages": [
+            "Customer satisfaction is our priority",
+            "Innovation meets reliability",
+            "Your trusted partner"
+          ],
+          "prohibited_words": [
+            "cheap",
+            "spam",
+            "scam",
+            "fake"
+          ],
+          "style_guidelines": {
+            "emoji_usage": "moderate",
+            "formality": "professional-casual",
+            "personalization": "high"
+          }
+        }
+      },
+      "constraints": {
+        "max_budget": null,
+        "start_time": null,
+        "end_time": null,
+        "excluded_channels": [],
+        "target_segments": [],
+        "respect_fatigue_limits": false,
+        "require_guardrail_approval": false
+      },
+      "expected_outcomes": [],
+      "budget_impact": null,
+      "created_at": "2026-01-19T10:07:09.958017"
+    }
+  ],
+  "support_recovery": [
+    {
+      "id": "597b89b2-7b85-4ad4-8491-ae0f804113bc",
+      "name": "Support Recovery - Angry Customer",
+      "type": "support",
+      "target_audience": [
+        "angry_customers"
+      ],
+      "content": {
+        "id": "d7b3e927-05d4-4c3e-9d1d-d9017c22a86d",
+        "name": "angry_customer_recovery",
+        "content": "We sincerely apologize for your recent experience. Your satisfaction is our priority. We'd like to make this right. Please contact us at [SUPPORT_CONTACT]",
+        "placeholders": [
+          "customer_name",
+          "ticket_id",
+          "support_contact"
+        ],
+        "channel_variants": {
+          "email": "Dear [NAME],\n\nWe sincerely apologize for your recent experience with us. Your satisfaction is our top priority, and we clearly fell short.\n\nWe'd like to make this right. Our support team is ready to help resolve your issue immediately.\n\nTicket #: [TICKET_ID]\nDirect Line: [PHONE]\nEmail: [EMAIL]\n\nWe value your business and hope to regain your trust.\n\nSincerely,\nCustomer Support Team",
+          "voice": "Hello, this is our customer support team. We're calling regarding your recent experience. We sincerely apologize and would like to make things right. A support specialist is standing by to help you."
+        },
+        "brand_profile": {
+          "brand_name": "AI-CPaaS Demo Brand",
+          "voice_tone": "professional-friendly",
+          "key_messages": [
+            "Customer satisfaction is our priority",
+            "Innovation meets reliability",
+            "Your trusted partner"
+          ],
+          "prohibited_words": [
+            "cheap",
+            "spam",
+            "scam",
+            "fake"
+          ],
+          "style_guidelines": {
+            "emoji_usage": "moderate",
+            "formality": "professional-casual",
+            "personalization": "high"
+          }
+        }
+      },
+      "constraints": {
+        "max_budget": null,
+        "start_time": null,
+        "end_time": null,
+        "excluded_channels": [
+          "sms",
+          "whatsapp"
+        ],
+        "target_segments": [],
+        "respect_fatigue_limits": false,
+        "require_guardrail_approval": true
+      },
+      "expected_outcomes": [],
+      "budget_impact": null,
+      "created_at": "2026-01-19T10:07:09.958028"
+    },
+    {
+      "id": "9c97d724-bcda-423d-bf57-2ab7913b573c",
+      "name": "Complaint Resolution Follow-up",
+      "type": "support",
+      "target_audience": [
+        "resolved_complaints"
+      ],
+      "content": {
+        "id": "cfe57857-c044-42ff-ae46-528e80ef3eee",
+        "name": "complaint_followup",
+        "content": "We wanted to follow up on your recent issue (Ticket #[TICKET_ID]). We hope everything has been resolved to your satisfaction. Your feedback matters to us.",
+        "placeholders": [
+          "ticket_id",
+          "resolution_date"
+        ],
+        "channel_variants": {
+          "email": "Hello [NAME],\n\nWe wanted to follow up on your recent support ticket (#[TICKET_ID]).\n\nWe hope the issue has been resolved to your satisfaction. Your feedback is important to us.\n\nIf you have any remaining concerns, please don't hesitate to reach out.\n\nThank you for your patience.\n\nBest regards,\nSupport Team",
+          "whatsapp": "Hi [NAME],\n\nFollowing up on ticket #[TICKET_ID].\n\nWe hope everything is resolved! \ud83d\ude0a\n\nAny concerns? Let us know.\n\nThanks for your patience!"
+        },
+        "brand_profile": {
+          "brand_name": "AI-CPaaS Demo Brand",
+          "voice_tone": "professional-friendly",
+          "key_messages": [
+            "Customer satisfaction is our priority",
+            "Innovation meets reliability",
+            "Your trusted partner"
+          ],
+          "prohibited_words": [
+            "cheap",
+            "spam",
+            "scam",
+            "fake"
+          ],
+          "style_guidelines": {
+            "emoji_usage": "moderate",
+            "formality": "professional-casual",
+            "personalization": "high"
+          }
+        }
+      },
+      "constraints": {
+        "max_budget": null,
+        "start_time": null,
+        "end_time": null,
+        "excluded_channels": [],
+        "target_segments": [],
+        "respect_fatigue_limits": true,
+        "require_guardrail_approval": true
+      },
+      "expected_outcomes": [],
+      "budget_impact": null,
+      "created_at": "2026-01-19T10:07:09.958038"
+    }
+  ]
+}

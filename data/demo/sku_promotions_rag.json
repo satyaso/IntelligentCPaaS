@@ -1,0 +1,532 @@
+{
+  "SKU-LAPTOP-001": {
+    "sku": "SKU-LAPTOP-001",
+    "product_name": "Premium Business Laptop 15\"",
+    "category": "Electronics > Computers > Laptops",
+    "promotion_score": 0.87,
+    "promotion_score_explanation": "High demand forecast + seasonal trend + low inventory",
+    
+    "deepar_forecast": {
+      "model_version": "deepar-v2.3",
+      "forecast_date": "2026-01-20",
+      "predicted_demand_30d": 1250,
+      "confidence_interval": {
+        "p10": 1100,
+        "p50": 1250,
+        "p90": 1400
+      },
+      "trend": "increasing",
+      "seasonality_factor": 1.15
+    },
+    
+    "active_promotions": [
+      {
+        "promotion_id": "PROMO-2026-Q1-LAPTOP",
+        "name": "New Year Tech Sale",
+        "discount_percentage": 15,
+        "discount_amount": 150.00,
+        "valid_from": "2026-01-15",
+        "valid_until": "2026-02-28",
+        "target_segments": ["high-value", "tech-enthusiasts", "business-users"],
+        "target_locations": ["Bangalore", "Mumbai", "Delhi"],
+        "expected_lift": 0.23,
+        "message_template": "🎉 New Year Special! Get 15% off on Premium Business Laptops. Perfect for your productivity needs!"
+      }
+    ],
+    
+    "cannibalization_analysis": {
+      "risk_level": "medium",
+      "risk_score": 0.34,
+      "affected_skus": [
+        {
+          "sku": "SKU-LAPTOP-002",
+          "product_name": "Premium Business Laptop 14\"",
+          "cannibalization_rate": 0.22,
+          "mitigation": "Emphasize 15\" screen advantage"
+        },
+        {
+          "sku": "SKU-LAPTOP-003",
+          "product_name": "Budget Business Laptop 15\"",
+          "cannibalization_rate": 0.12,
+          "mitigation": "Highlight premium features"
+        }
+      ]
+    },
+    
+    "inventory_status": {
+      "available": 330,
+      "reserved": 120,
+      "in_transit": 200,
+      "restock_date": "2026-02-15"
+    }
+  },
+  
+  "SKU-PHONE-002": {
+    "sku": "SKU-PHONE-002",
+    "product_name": "Flagship Smartphone 5G",
+    "category": "Electronics > Mobile > Smartphones",
+    "promotion_score": 0.92,
+    "promotion_score_explanation": "Very high demand + new model launch + strong inventory",
+    
+    "deepar_forecast": {
+      "model_version": "deepar-v2.3",
+      "forecast_date": "2026-01-20",
+      "predicted_demand_30d": 2100,
+      "confidence_interval": {
+        "p10": 1900,
+        "p50": 2100,
+        "p90": 2300
+      },
+      "trend": "strongly_increasing",
+      "seasonality_factor": 1.25
+    },
+    
+    "active_promotions": [
+      {
+        "promotion_id": "PROMO-2026-Q1-PHONE",
+        "name": "5G Revolution Sale",
+        "discount_percentage": 10,
+        "discount_amount": 80.00,
+        "valid_from": "2026-01-15",
+        "valid_until": "2026-02-28",
+        "target_segments": ["tech-enthusiasts", "early-adopters", "high-value"],
+        "target_locations": ["Bangalore", "Mumbai", "Delhi", "Hyderabad"],
+        "expected_lift": 0.31,
+        "message_template": "📱 Experience 5G! Get 10% off on our Flagship Smartphone. Limited time offer!"
+      }
+    ],
+    
+    "cannibalization_analysis": {
+      "risk_level": "low",
+      "risk_score": 0.18,
+      "affected_skus": [
+        {
+          "sku": "SKU-PHONE-001",
+          "product_name": "Mid-Range Smartphone 4G",
+          "cannibalization_rate": 0.15,
+          "mitigation": "Position as budget-friendly alternative"
+        }
+      ]
+    },
+    
+    "inventory_status": {
+      "available": 850,
+      "reserved": 200,
+      "in_transit": 500,
+      "restock_date": "2026-02-10"
+    }
+  },
+  
+  "SKU-TABLET-003": {
+    "sku": "SKU-TABLET-003",
+    "product_name": "Pro Tablet 12.9\"",
+    "category": "Electronics > Tablets",
+    "promotion_score": 0.75,
+    "promotion_score_explanation": "Moderate demand + niche segment + adequate inventory",
+    
+    "deepar_forecast": {
+      "model_version": "deepar-v2.3",
+      "forecast_date": "2026-01-20",
+      "predicted_demand_30d": 680,
+      "confidence_interval": {
+        "p10": 600,
+        "p50": 680,
+        "p90": 760
+      },
+      "trend": "stable",
+      "seasonality_factor": 1.05
+    },
+    
+    "active_promotions": [
+      {
+        "promotion_id": "PROMO-2026-Q1-TABLET",
+        "name": "Creative Pro Bundle",
+        "discount_percentage": 12,
+        "discount_amount": 95.00,
+        "valid_from": "2026-01-15",
+        "valid_until": "2026-02-28",
+        "target_segments": ["creative-professionals", "students", "business-users"],
+        "target_locations": ["Bangalore", "Mumbai", "Pune"],
+        "expected_lift": 0.19,
+        "message_template": "🎨 Unleash your creativity! Get 12% off on Pro Tablets + Free Stylus!"
+      }
+    ],
+    
+    "cannibalization_analysis": {
+      "risk_level": "low",
+      "risk_score": 0.12,
+      "affected_skus": []
+    },
+    
+    "inventory_status": {
+      "available": 420,
+      "reserved": 80,
+      "in_transit": 150,
+      "restock_date": "2026-02-20"
+    }
+  },
+  
+  "SKU-WATCH-004": {
+    "sku": "SKU-WATCH-004",
+    "product_name": "Smart Fitness Watch",
+    "category": "Electronics > Wearables > Smartwatches",
+    "promotion_score": 0.81,
+    "promotion_score_explanation": "High demand + fitness trend + good inventory",
+    
+    "deepar_forecast": {
+      "model_version": "deepar-v2.3",
+      "forecast_date": "2026-01-20",
+      "predicted_demand_30d": 1450,
+      "confidence_interval": {
+        "p10": 1300,
+        "p50": 1450,
+        "p90": 1600
+      },
+      "trend": "increasing",
+      "seasonality_factor": 1.20
+    },
+    
+    "active_promotions": [
+      {
+        "promotion_id": "PROMO-2026-Q1-WATCH",
+        "name": "New Year Fitness Goals",
+        "discount_percentage": 20,
+        "discount_amount": 60.00,
+        "valid_from": "2026-01-01",
+        "valid_until": "2026-02-14",
+        "target_segments": ["fitness-enthusiasts", "health-conscious", "tech-enthusiasts"],
+        "target_locations": ["Bangalore", "Mumbai", "Delhi", "Chennai"],
+        "expected_lift": 0.28,
+        "message_template": "💪 Achieve your fitness goals! Get 20% off on Smart Fitness Watches!"
+      }
+    ],
+    
+    "cannibalization_analysis": {
+      "risk_level": "very_low",
+      "risk_score": 0.08,
+      "affected_skus": []
+    },
+    
+    "inventory_status": {
+      "available": 720,
+      "reserved": 180,
+      "in_transit": 300,
+      "restock_date": "2026-02-05"
+    }
+  },
+  
+  "SKU-HEADPHONE-005": {
+    "sku": "SKU-HEADPHONE-005",
+    "product_name": "Noise-Cancelling Headphones",
+    "category": "Electronics > Audio > Headphones",
+    "promotion_score": 0.79,
+    "promotion_score_explanation": "Good demand + work-from-home trend + competitive pricing",
+    
+    "deepar_forecast": {
+      "model_version": "deepar-v2.3",
+      "forecast_date": "2026-01-20",
+      "predicted_demand_30d": 980,
+      "confidence_interval": {
+        "p10": 880,
+        "p50": 980,
+        "p90": 1080
+      },
+      "trend": "stable",
+      "seasonality_factor": 1.08
+    },
+    
+    "active_promotions": [
+      {
+        "promotion_id": "PROMO-2026-Q1-AUDIO",
+        "name": "Premium Audio Experience",
+        "discount_percentage": 18,
+        "discount_amount": 45.00,
+        "valid_from": "2026-01-15",
+        "valid_until": "2026-02-28",
+        "target_segments": ["music-lovers", "remote-workers", "students"],
+        "target_locations": ["Bangalore", "Mumbai", "Delhi", "Pune", "Hyderabad"],
+        "expected_lift": 0.21,
+        "message_template": "🎧 Immerse in sound! Get 18% off on Premium Noise-Cancelling Headphones!"
+      }
+    ],
+    
+    "cannibalization_analysis": {
+      "risk_level": "low",
+      "risk_score": 0.15,
+      "affected_skus": [
+        {
+          "sku": "SKU-HEADPHONE-006",
+          "product_name": "Wireless Earbuds",
+          "cannibalization_rate": 0.10,
+          "mitigation": "Emphasize over-ear comfort for long sessions"
+        }
+      ]
+    },
+    
+    "inventory_status": {
+      "available": 560,
+      "reserved": 140,
+      "in_transit": 250,
+      "restock_date": "2026-02-12"
+    }
+  },
+  
+  "SKU-CAMERA-006": {
+    "sku": "SKU-CAMERA-006",
+    "product_name": "Mirrorless Camera Pro",
+    "category": "Electronics > Cameras > Mirrorless",
+    "promotion_score": 0.68,
+    "promotion_score_explanation": "Moderate demand + niche professional segment + premium pricing",
+    
+    "deepar_forecast": {
+      "model_version": "deepar-v2.3",
+      "forecast_date": "2026-01-20",
+      "predicted_demand_30d": 320,
+      "confidence_interval": {
+        "p10": 280,
+        "p50": 320,
+        "p90": 360
+      },
+      "trend": "stable",
+      "seasonality_factor": 1.02
+    },
+    
+    "active_promotions": [
+      {
+        "promotion_id": "PROMO-2026-Q1-CAMERA",
+        "name": "Creator's Choice Bundle",
+        "discount_percentage": 10,
+        "discount_amount": 200.00,
+        "valid_from": "2026-01-15",
+        "valid_until": "2026-03-31",
+        "target_segments": ["content-creators", "photographers", "videographers"],
+        "target_locations": ["Bangalore", "Mumbai", "Delhi"],
+        "expected_lift": 0.15,
+        "message_template": "📸 Capture perfection! Get 10% off on Pro Mirrorless Cameras + Free Lens!"
+      }
+    ],
+    
+    "cannibalization_analysis": {
+      "risk_level": "very_low",
+      "risk_score": 0.05,
+      "affected_skus": []
+    },
+    
+    "inventory_status": {
+      "available": 180,
+      "reserved": 45,
+      "in_transit": 80,
+      "restock_date": "2026-03-01"
+    }
+  },
+  
+  "SKU-SPEAKER-007": {
+    "sku": "SKU-SPEAKER-007",
+    "product_name": "Smart Speaker with Voice Assistant",
+    "category": "Electronics > Audio > Smart Speakers",
+    "promotion_score": 0.84,
+    "promotion_score_explanation": "High demand + smart home trend + competitive advantage",
+    
+    "deepar_forecast": {
+      "model_version": "deepar-v2.3",
+      "forecast_date": "2026-01-20",
+      "predicted_demand_30d": 1680,
+      "confidence_interval": {
+        "p10": 1500,
+        "p50": 1680,
+        "p90": 1850
+      },
+      "trend": "increasing",
+      "seasonality_factor": 1.18
+    },
+    
+    "active_promotions": [
+      {
+        "promotion_id": "PROMO-2026-Q1-SMART",
+        "name": "Smart Home Revolution",
+        "discount_percentage": 25,
+        "discount_amount": 50.00,
+        "valid_from": "2026-01-15",
+        "valid_until": "2026-02-28",
+        "target_segments": ["tech-enthusiasts", "smart-home-users", "early-adopters"],
+        "target_locations": ["Bangalore", "Mumbai", "Delhi", "Hyderabad", "Pune"],
+        "expected_lift": 0.35,
+        "message_template": "🏠 Make your home smarter! Get 25% off on Smart Speakers with Voice Assistant!"
+      }
+    ],
+    
+    "cannibalization_analysis": {
+      "risk_level": "low",
+      "risk_score": 0.11,
+      "affected_skus": []
+    },
+    
+    "inventory_status": {
+      "available": 920,
+      "reserved": 230,
+      "in_transit": 400,
+      "restock_date": "2026-02-08"
+    }
+  },
+  
+  "SKU-MONITOR-008": {
+    "sku": "SKU-MONITOR-008",
+    "product_name": "4K Ultra HD Monitor 27\"",
+    "category": "Electronics > Computers > Monitors",
+    "promotion_score": 0.73,
+    "promotion_score_explanation": "Good demand + work-from-home setup + competitive market",
+    
+    "deepar_forecast": {
+      "model_version": "deepar-v2.3",
+      "forecast_date": "2026-01-20",
+      "predicted_demand_30d": 540,
+      "confidence_interval": {
+        "p10": 480,
+        "p50": 540,
+        "p90": 600
+      },
+      "trend": "stable",
+      "seasonality_factor": 1.06
+    },
+    
+    "active_promotions": [
+      {
+        "promotion_id": "PROMO-2026-Q1-MONITOR",
+        "name": "Productivity Boost Sale",
+        "discount_percentage": 14,
+        "discount_amount": 70.00,
+        "valid_from": "2026-01-15",
+        "valid_until": "2026-02-28",
+        "target_segments": ["remote-workers", "gamers", "creative-professionals"],
+        "target_locations": ["Bangalore", "Mumbai", "Delhi", "Pune"],
+        "expected_lift": 0.18,
+        "message_template": "🖥️ Upgrade your workspace! Get 14% off on 4K Ultra HD Monitors!"
+      }
+    ],
+    
+    "cannibalization_analysis": {
+      "risk_level": "medium",
+      "risk_score": 0.28,
+      "affected_skus": [
+        {
+          "sku": "SKU-MONITOR-009",
+          "product_name": "Full HD Monitor 24\"",
+          "cannibalization_rate": 0.20,
+          "mitigation": "Emphasize 4K quality and larger screen"
+        }
+      ]
+    },
+    
+    "inventory_status": {
+      "available": 380,
+      "reserved": 95,
+      "in_transit": 180,
+      "restock_date": "2026-02-18"
+    }
+  },
+  
+  "SKU-KEYBOARD-009": {
+    "sku": "SKU-KEYBOARD-009",
+    "product_name": "Mechanical Gaming Keyboard RGB",
+    "category": "Electronics > Computers > Keyboards",
+    "promotion_score": 0.77,
+    "promotion_score_explanation": "Good demand + gaming trend + enthusiast segment",
+    
+    "deepar_forecast": {
+      "model_version": "deepar-v2.3",
+      "forecast_date": "2026-01-20",
+      "predicted_demand_30d": 820,
+      "confidence_interval": {
+        "p10": 740,
+        "p50": 820,
+        "p90": 900
+      },
+      "trend": "increasing",
+      "seasonality_factor": 1.12
+    },
+    
+    "active_promotions": [
+      {
+        "promotion_id": "PROMO-2026-Q1-GAMING",
+        "name": "Gamer's Paradise Sale",
+        "discount_percentage": 16,
+        "discount_amount": 32.00,
+        "valid_from": "2026-01-15",
+        "valid_until": "2026-02-28",
+        "target_segments": ["gamers", "tech-enthusiasts", "students"],
+        "target_locations": ["Bangalore", "Mumbai", "Delhi", "Hyderabad", "Chennai"],
+        "expected_lift": 0.24,
+        "message_template": "⌨️ Level up your game! Get 16% off on Mechanical Gaming Keyboards!"
+      }
+    ],
+    
+    "cannibalization_analysis": {
+      "risk_level": "low",
+      "risk_score": 0.14,
+      "affected_skus": []
+    },
+    
+    "inventory_status": {
+      "available": 640,
+      "reserved": 160,
+      "in_transit": 280,
+      "restock_date": "2026-02-10"
+    }
+  },
+  
+  "SKU-ROUTER-010": {
+    "sku": "SKU-ROUTER-010",
+    "product_name": "WiFi 6 Mesh Router System",
+    "category": "Electronics > Networking > Routers",
+    "promotion_score": 0.80,
+    "promotion_score_explanation": "High demand + remote work necessity + technology upgrade cycle",
+    
+    "deepar_forecast": {
+      "model_version": "deepar-v2.3",
+      "forecast_date": "2026-01-20",
+      "predicted_demand_30d": 1120,
+      "confidence_interval": {
+        "p10": 1000,
+        "p50": 1120,
+        "p90": 1240
+      },
+      "trend": "increasing",
+      "seasonality_factor": 1.14
+    },
+    
+    "active_promotions": [
+      {
+        "promotion_id": "PROMO-2026-Q1-NETWORK",
+        "name": "Seamless Connectivity Sale",
+        "discount_percentage": 17,
+        "discount_amount": 85.00,
+        "valid_from": "2026-01-15",
+        "valid_until": "2026-02-28",
+        "target_segments": ["remote-workers", "tech-enthusiasts", "families"],
+        "target_locations": ["Bangalore", "Mumbai", "Delhi", "Pune", "Hyderabad"],
+        "expected_lift": 0.26,
+        "message_template": "📡 Stay connected everywhere! Get 17% off on WiFi 6 Mesh Router Systems!"
+      }
+    ],
+    
+    "cannibalization_analysis": {
+      "risk_level": "low",
+      "risk_score": 0.16,
+      "affected_skus": [
+        {
+          "sku": "SKU-ROUTER-011",
+          "product_name": "Standard WiFi 5 Router",
+          "cannibalization_rate": 0.12,
+          "mitigation": "Emphasize WiFi 6 speed and mesh coverage"
+        }
+      ]
+    },
+    
+    "inventory_status": {
+      "available": 680,
+      "reserved": 170,
+      "in_transit": 320,
+      "restock_date": "2026-02-12"
+    }
+  }
+}

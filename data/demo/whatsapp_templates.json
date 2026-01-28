@@ -1,0 +1,364 @@
+{
+  "templates": [
+    {
+      "template_id": "promotional_discount_v1",
+      "template_name": "promotional_discount_v1",
+      "language": "en",
+      "category": "MARKETING",
+      "status": "APPROVED",
+      "components": [
+        {
+          "type": "HEADER",
+          "format": "TEXT",
+          "text": "🎉 Exclusive Offer for {{1}}!"
+        },
+        {
+          "type": "BODY",
+          "text": "Hello {{1}}! 👋\n\nWe have an *exclusive offer* just for you in {{2}}!\n\n🎁 Get *{{3}}% OFF* on {{4}}!\n\n✨ {{5}}\n\n⏰ Limited time offer - Don't miss out!\n🛒 Shop now and save big!\n\nReply STOP to unsubscribe."
+        },
+        {
+          "type": "FOOTER",
+          "text": "Powered by AI-CPaaS Demo"
+        },
+        {
+          "type": "BUTTONS",
+          "buttons": [
+            {
+              "type": "URL",
+              "text": "Shop Now",
+              "url": "https://example.com/shop/{{6}}"
+            },
+            {
+              "type": "PHONE_NUMBER",
+              "text": "Call Us",
+              "phone_number": "+1234567890"
+            }
+          ]
+        }
+      ],
+      "variables": [
+        {
+          "name": "location",
+          "example": "Bangalore",
+          "description": "Customer location"
+        },
+        {
+          "name": "first_name",
+          "example": "John",
+          "description": "Customer first name"
+        },
+        {
+          "name": "location_repeat",
+          "example": "Bangalore",
+          "description": "Customer location (repeated)"
+        },
+        {
+          "name": "discount_percentage",
+          "example": "20",
+          "description": "Discount percentage"
+        },
+        {
+          "name": "product_name",
+          "example": "Premium Laptop",
+          "description": "Product name"
+        },
+        {
+          "name": "description",
+          "example": "High-performance laptop with latest features",
+          "description": "Product description"
+        },
+        {
+          "name": "product_sku",
+          "example": "SKU-LAPTOP-001",
+          "description": "Product SKU for URL"
+        }
+      ]
+    },
+    {
+      "template_id": "promotional_simple_v1",
+      "template_name": "promotional_simple_v1",
+      "language": "en",
+      "category": "MARKETING",
+      "status": "APPROVED",
+      "components": [
+        {
+          "type": "HEADER",
+          "format": "TEXT",
+          "text": "🎁 Special Offer!"
+        },
+        {
+          "type": "BODY",
+          "text": "Hi {{1}}! 🎉\n\n*{{2}}% OFF* on {{3}} in {{4}}!\n\nLimited time offer. Shop now!\n\nReply STOP to unsubscribe."
+        },
+        {
+          "type": "FOOTER",
+          "text": "AI-CPaaS Demo"
+        },
+        {
+          "type": "BUTTONS",
+          "buttons": [
+            {
+              "type": "URL",
+              "text": "View Offer",
+              "url": "https://example.com/offers"
+            }
+          ]
+        }
+      ],
+      "variables": [
+        {
+          "name": "first_name",
+          "example": "Sarah",
+          "description": "Customer first name"
+        },
+        {
+          "name": "discount_percentage",
+          "example": "15",
+          "description": "Discount percentage"
+        },
+        {
+          "name": "product_name",
+          "example": "Smartphone",
+          "description": "Product name"
+        },
+        {
+          "name": "location",
+          "example": "Mumbai",
+          "description": "Customer location"
+        }
+      ]
+    },
+    {
+      "template_id": "promotional_premium_v1",
+      "template_name": "promotional_premium_v1",
+      "language": "en",
+      "category": "MARKETING",
+      "status": "APPROVED",
+      "components": [
+        {
+          "type": "HEADER",
+          "format": "IMAGE",
+          "example": {
+            "header_handle": [
+              "https://example.com/images/promo-banner.jpg"
+            ]
+          }
+        },
+        {
+          "type": "BODY",
+          "text": "Hello {{1}}! 👋\n\n🌟 *Exclusive {{2}} Offer* 🌟\n\nGet *{{3}}% OFF* on {{4}}!\n\n{{5}}\n\n✅ Premium Quality\n✅ Fast Delivery to {{2}}\n✅ Secure Payment\n✅ 30-Day Returns\n\n⏰ Offer valid until {{6}}\n\nReply STOP to unsubscribe."
+        },
+        {
+          "type": "FOOTER",
+          "text": "Your trusted shopping partner"
+        },
+        {
+          "type": "BUTTONS",
+          "buttons": [
+            {
+              "type": "URL",
+              "text": "Shop Now",
+              "url": "https://example.com/shop"
+            },
+            {
+              "type": "QUICK_REPLY",
+              "text": "More Info"
+            }
+          ]
+        }
+      ],
+      "variables": [
+        {
+          "name": "first_name",
+          "example": "Michael",
+          "description": "Customer first name"
+        },
+        {
+          "name": "location",
+          "example": "Delhi",
+          "description": "Customer location"
+        },
+        {
+          "name": "discount_percentage",
+          "example": "25",
+          "description": "Discount percentage"
+        },
+        {
+          "name": "product_name",
+          "example": "Premium Headphones",
+          "description": "Product name"
+        },
+        {
+          "name": "description",
+          "example": "Noise-cancelling wireless headphones with 40-hour battery",
+          "description": "Product description"
+        },
+        {
+          "name": "expiry_date",
+          "example": "Feb 28, 2026",
+          "description": "Offer expiry date"
+        }
+      ]
+    },
+    {
+      "template_id": "promotional_urgent_v1",
+      "template_name": "promotional_urgent_v1",
+      "language": "en",
+      "category": "MARKETING",
+      "status": "APPROVED",
+      "components": [
+        {
+          "type": "HEADER",
+          "format": "TEXT",
+          "text": "⚡ FLASH SALE ALERT!"
+        },
+        {
+          "type": "BODY",
+          "text": "{{1}}, hurry! ⏰\n\n*{{2}}% OFF* on {{3}}\n📍 Available in {{4}}\n\n🔥 Only {{5}} units left!\n⏳ Ends in {{6}} hours!\n\n{{7}}\n\nDon't miss this amazing deal!\n\nReply STOP to unsubscribe."
+        },
+        {
+          "type": "FOOTER",
+          "text": "Limited stock available"
+        },
+        {
+          "type": "BUTTONS",
+          "buttons": [
+            {
+              "type": "URL",
+              "text": "Buy Now",
+              "url": "https://example.com/flash-sale"
+            }
+          ]
+        }
+      ],
+      "variables": [
+        {
+          "name": "first_name",
+          "example": "Emma",
+          "description": "Customer first name"
+        },
+        {
+          "name": "discount_percentage",
+          "example": "30",
+          "description": "Discount percentage"
+        },
+        {
+          "name": "product_name",
+          "example": "Smart Watch",
+          "description": "Product name"
+        },
+        {
+          "name": "location",
+          "example": "Bangalore",
+          "description": "Customer location"
+        },
+        {
+          "name": "stock_count",
+          "example": "15",
+          "description": "Remaining stock"
+        },
+        {
+          "name": "hours_remaining",
+          "example": "6",
+          "description": "Hours until offer ends"
+        },
+        {
+          "name": "description",
+          "example": "Fitness tracking, heart rate monitor, waterproof",
+          "description": "Product highlights"
+        }
+      ]
+    },
+    {
+      "template_id": "promotional_personalized_v1",
+      "template_name": "promotional_personalized_v1",
+      "language": "en",
+      "category": "MARKETING",
+      "status": "APPROVED",
+      "components": [
+        {
+          "type": "HEADER",
+          "format": "TEXT",
+          "text": "🎯 Picked Just for You, {{1}}!"
+        },
+        {
+          "type": "BODY",
+          "text": "Hi {{1}}! 😊\n\nBased on your interest in *{{2}}*, we have a special offer:\n\n💰 *{{3}}% OFF* on {{4}}\n📍 Delivering to {{5}}\n\n{{6}}\n\n🎁 *Bonus:* Free shipping on orders above ₹999\n⭐ Rated 4.5/5 by {{7}}+ customers\n\n✨ Why you'll love it:\n• {{8}}\n\nReply STOP to unsubscribe."
+        },
+        {
+          "type": "FOOTER",
+          "text": "Personalized for you"
+        },
+        {
+          "type": "BUTTONS",
+          "buttons": [
+            {
+              "type": "URL",
+              "text": "View Product",
+              "url": "https://example.com/products/{{9}}"
+            },
+            {
+              "type": "QUICK_REPLY",
+              "text": "Add to Cart"
+            }
+          ]
+        }
+      ],
+      "variables": [
+        {
+          "name": "first_name",
+          "example": "Priya",
+          "description": "Customer first name"
+        },
+        {
+          "name": "category",
+          "example": "Electronics",
+          "description": "Product category"
+        },
+        {
+          "name": "discount_percentage",
+          "example": "20",
+          "description": "Discount percentage"
+        },
+        {
+          "name": "product_name",
+          "example": "Wireless Keyboard",
+          "description": "Product name"
+        },
+        {
+          "name": "location",
+          "example": "Pune",
+          "description": "Customer location"
+        },
+        {
+          "name": "description",
+          "example": "Ergonomic design with backlit keys and long battery life",
+          "description": "Product description"
+        },
+        {
+          "name": "review_count",
+          "example": "1250",
+          "description": "Number of customer reviews"
+        },
+        {
+          "name": "key_feature",
+          "example": "Bluetooth 5.0, 6-month battery, silent keys",
+          "description": "Key product features"
+        },
+        {
+          "name": "product_id",
+          "example": "keyboard-001",
+          "description": "Product ID for URL"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2026-01-21",
+    "total_templates": 5,
+    "aws_service": "AWS End User Messaging",
+    "channel": "WhatsApp",
+    "notes": "These templates must be approved by WhatsApp before use. Template IDs should be configured in AWS End User Messaging service."
+  }
+}

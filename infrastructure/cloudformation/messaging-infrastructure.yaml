@@ -1,0 +1,431 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'AI-CPaaS Demo - AWS End User Messaging Infrastructure with Rate Limiting'
+
+Parameters:
+  Environment:
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - staging
+      - prod
+    Description: Environment name
+  
+  ProjectName:
+    Type: String
+    Default: ai-cpaas-demo
+    Description: Project name for resource naming
+
+Resources:
+  # ============================================================================
+  # DynamoDB Tables
+  # ============================================================================
+  
+  # Rate Limiting State Table
+  RateLimitsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub '${ProjectName}-rate-limits-${Environment}'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: limiter_key
+          AttributeType: S
+      KeySchema:
+        - AttributeName: limiter_key
+          KeyType: HASH
+      TimeToLiveSpecification:
+        Enabled: true
+        AttributeName: ttl
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+      Tags:
+        - Key: Project
+          Value: !Ref ProjectName
+        - Key: Environment
+          Value: !Ref Environment
+        - Key: Purpose
+          Value: Rate limiting state for distributed throttling
+  
+  # Delivery Tracking Table
+  DeliveryTrackingTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub '${ProjectName}-delivery-tracking-${Environment}'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: message_id
+          AttributeType: S
+        - AttributeName: customer_id
+          AttributeType: S
+        - AttributeName: timestamp
+          AttributeType: N
+      KeySchema:
+        - AttributeName: message_id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: customer-index
+          KeySchema:
+            - AttributeName: customer_id
+              KeyType: HASH
+            - AttributeName: timestamp
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+      TimeToLiveSpecification:
+        Enabled: true
+        AttributeName: ttl
+      StreamSpecification:
+        StreamViewType: NEW_AND_OLD_IMAGES
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+      Tags:
+        - Key: Project
+          Value: !Ref ProjectName
+        - Key: Environment
+          Value: !Ref Environment
+        - Key: Purpose
+          Value: Message delivery tracking and analytics
+
+  # ============================================================================
+  # EventBridge Rules for Delivery Status
+  # ============================================================================
+  
+  # SMS Delivery Status Rule
+  SMSDeliveryStatusRule:
+    Type: AWS::Events::Rule
+    Properties:
+      Name: !Sub '${ProjectName}-sms-delivery-${Environment}'
+      Description: Capture SMS delivery status events from AWS End User Messaging
+      EventPattern:
+        source:
+          - aws.end-user-messaging
+        detail-type:
+          - SMS Delivery Status
+      State: ENABLED
+      Targets:
+        - Arn: !GetAtt DeliveryStatusProcessor.Arn
+          Id: DeliveryStatusProcessorTarget
+  
+  # WhatsApp Delivery Status Rule
+  WhatsAppDeliveryStatusRule:
+    Type: AWS::Events::Rule
+    Properties:
+      Name: !Sub '${ProjectName}-whatsapp-delivery-${Environment}'
+      Description: Capture WhatsApp delivery status events from AWS End User Messaging
+      EventPattern:
+        source:
+          - aws.end-user-messaging
+        detail-type:
+          - WhatsApp Delivery Status
+      State: ENABLED
+      Targets:
+        - Arn: !GetAtt DeliveryStatusProcessor.Arn
+          Id: DeliveryStatusProcessorTarget
+
+  # ============================================================================
+  # Lambda Functions
+  # ============================================================================
+  
+  # Delivery Status Processor Lambda
+  DeliveryStatusProcessor:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub '${ProjectName}-delivery-processor-${Environment}'
+      Runtime: python3.11
+      Handler: index.lambda_handler
+      Role: !GetAtt DeliveryProcessorRole.Arn
+      Timeout: 60
+      MemorySize: 256
+      Environment:
+        Variables:
+          DELIVERY_TABLE: !Ref DeliveryTrackingTable
+          ENVIRONMENT: !Ref Environment
+      Code:
+        ZipFile: |
+          import json
+          import os
+          import boto3
+          from datetime import datetime
+          
+          dynamodb = boto3.resource('dynamodb')
+          table = dynamodb.Table(os.environ['DELIVERY_TABLE'])
+          
+          def lambda_handler(event, context):
+              """Process delivery status events from EventBridge."""
+              print(f"Received event: {json.dumps(event)}")
+              
+              detail = event.get('detail', {})
+              message_id = detail.get('messageId')
+              status = detail.get('status')
+              channel = detail.get('channel', 'unknown')
+              
+              if not message_id:
+                  print("No message_id in event, skipping")
+                  return {'statusCode': 200}
+              
+              # Update delivery tracking table
+              try:
+                  table.update_item(
+                      Key={'message_id': message_id},
+                      UpdateExpression='SET delivery_status = :status, updated_at = :timestamp, channel = :channel',
+                      ExpressionAttributeValues={
+                          ':status': status,
+                          ':timestamp': int(datetime.utcnow().timestamp()),
+                          ':channel': channel
+                      }
+                  )
+                  print(f"Updated delivery status for {message_id}: {status}")
+              except Exception as e:
+                  print(f"Error updating delivery status: {e}")
+                  raise
+              
+              return {'statusCode': 200}
+      Tags:
+        - Key: Project
+          Value: !Ref ProjectName
+        - Key: Environment
+          Value: !Ref Environment
+
+  # Lambda Permission for EventBridge (SMS)
+  SMSDeliveryStatusPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref DeliveryStatusProcessor
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt SMSDeliveryStatusRule.Arn
+
+  # Lambda Permission for EventBridge (WhatsApp)
+  WhatsAppDeliveryStatusPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref DeliveryStatusProcessor
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt WhatsAppDeliveryStatusRule.Arn
+
+  # ============================================================================
+  # IAM Roles
+  # ============================================================================
+  
+  # Delivery Processor Lambda Role
+  DeliveryProcessorRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub '${ProjectName}-delivery-processor-${Environment}'
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: DynamoDBAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:UpdateItem
+                  - dynamodb:GetItem
+                  - dynamodb:PutItem
+                Resource: !GetAtt DeliveryTrackingTable.Arn
+
+  # Application Role for Messaging
+  MessagingApplicationRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub '${ProjectName}-messaging-app-${Environment}'
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+                - ecs-tasks.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: MessagingAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              # AWS End User Messaging permissions
+              - Effect: Allow
+                Action:
+                  - sms-voice:SendTextMessage
+                  - sms-voice:SendVoiceMessage
+                Resource: '*'
+              
+              # DynamoDB permissions for rate limiting
+              - Effect: Allow
+                Action:
+                  - dynamodb:GetItem
+                  - dynamodb:PutItem
+                  - dynamodb:UpdateItem
+                  - dynamodb:Query
+                Resource:
+                  - !GetAtt RateLimitsTable.Arn
+                  - !GetAtt DeliveryTrackingTable.Arn
+                  - !Sub '${DeliveryTrackingTable.Arn}/index/*'
+              
+              # CloudWatch metrics
+              - Effect: Allow
+                Action:
+                  - cloudwatch:PutMetricData
+                Resource: '*'
+
+  # ============================================================================
+  # SNS Topic for Alarms
+  # ============================================================================
+  
+  AlarmTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: !Sub '${ProjectName}-messaging-alarms-${Environment}'
+      DisplayName: AI-CPaaS Messaging Alarms
+      Tags:
+        - Key: Project
+          Value: !Ref ProjectName
+        - Key: Environment
+          Value: !Ref Environment
+
+  # ============================================================================
+  # CloudWatch Alarms
+  # ============================================================================
+  
+  # SMS Throttling Alarm
+  SMSThrottlingAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub '${ProjectName}-sms-throttling-${Environment}'
+      AlarmDescription: Alert when SMS messages are being throttled
+      AlarmActions:
+        - !Ref AlarmTopic
+      MetricName: ThrottledMessages
+      Namespace: !Sub '${ProjectName}/Messaging'
+      Statistic: Sum
+      Period: 300
+      EvaluationPeriods: 1
+      Threshold: 10
+      ComparisonOperator: GreaterThanThreshold
+      Dimensions:
+        - Name: Channel
+          Value: SMS
+        - Name: Environment
+          Value: !Ref Environment
+      TreatMissingData: notBreaching
+
+  # WhatsApp Throttling Alarm
+  WhatsAppThrottlingAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub '${ProjectName}-whatsapp-throttling-${Environment}'
+      AlarmDescription: Alert when WhatsApp messages are being throttled
+      AlarmActions:
+        - !Ref AlarmTopic
+      MetricName: ThrottledMessages
+      Namespace: !Sub '${ProjectName}/Messaging'
+      Statistic: Sum
+      Period: 300
+      EvaluationPeriods: 1
+      Threshold: 10
+      ComparisonOperator: GreaterThanThreshold
+      Dimensions:
+        - Name: Channel
+          Value: WhatsApp
+        - Name: Environment
+          Value: !Ref Environment
+      TreatMissingData: notBreaching
+
+  # Delivery Failure Alarm
+  DeliveryFailureAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub '${ProjectName}-delivery-failures-${Environment}'
+      AlarmDescription: Alert when message delivery failure rate exceeds threshold
+      AlarmActions:
+        - !Ref AlarmTopic
+      MetricName: FailedDeliveries
+      Namespace: !Sub '${ProjectName}/Messaging'
+      Statistic: Sum
+      Period: 300
+      EvaluationPeriods: 2
+      Threshold: 50
+      ComparisonOperator: GreaterThanThreshold
+      Dimensions:
+        - Name: Environment
+          Value: !Ref Environment
+      TreatMissingData: notBreaching
+
+  # Rate Limit Capacity Alarm
+  RateLimitCapacityAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub '${ProjectName}-rate-limit-capacity-${Environment}'
+      AlarmDescription: Alert when rate limit capacity is consistently low
+      AlarmActions:
+        - !Ref AlarmTopic
+      MetricName: AvailableCapacity
+      Namespace: !Sub '${ProjectName}/Messaging'
+      Statistic: Average
+      Period: 300
+      EvaluationPeriods: 3
+      Threshold: 10
+      ComparisonOperator: LessThanThreshold
+      Dimensions:
+        - Name: Environment
+          Value: !Ref Environment
+      TreatMissingData: notBreaching
+
+# ============================================================================
+# Outputs
+# ============================================================================
+
+Outputs:
+  RateLimitsTableName:
+    Description: DynamoDB table name for rate limiting
+    Value: !Ref RateLimitsTable
+    Export:
+      Name: !Sub '${AWS::StackName}-RateLimitsTable'
+
+  RateLimitsTableArn:
+    Description: DynamoDB table ARN for rate limiting
+    Value: !GetAtt RateLimitsTable.Arn
+    Export:
+      Name: !Sub '${AWS::StackName}-RateLimitsTableArn'
+
+  DeliveryTrackingTableName:
+    Description: DynamoDB table name for delivery tracking
+    Value: !Ref DeliveryTrackingTable
+    Export:
+      Name: !Sub '${AWS::StackName}-DeliveryTrackingTable'
+
+  DeliveryTrackingTableArn:
+    Description: DynamoDB table ARN for delivery tracking
+    Value: !GetAtt DeliveryTrackingTable.Arn
+    Export:
+      Name: !Sub '${AWS::StackName}-DeliveryTrackingTableArn'
+
+  MessagingApplicationRoleArn:
+    Description: IAM role ARN for messaging applications
+    Value: !GetAtt MessagingApplicationRole.Arn
+    Export:
+      Name: !Sub '${AWS::StackName}-MessagingRoleArn'
+
+  DeliveryStatusProcessorArn:
+    Description: Lambda function ARN for delivery status processing
+    Value: !GetAtt DeliveryStatusProcessor.Arn
+    Export:
+      Name: !Sub '${AWS::StackName}-DeliveryProcessorArn'
+
+  AlarmTopicArn:
+    Description: SNS topic ARN for alarms
+    Value: !Ref AlarmTopic
+    Export:
+      Name: !Sub '${AWS::StackName}-AlarmTopicArn'
