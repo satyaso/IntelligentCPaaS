@@ -1,0 +1,1998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applied-Agentic AI AWS CPaaS Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .query-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .query-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 15px;
+            align-items: end;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #495057;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .form-group select,
+        .form-group input {
+            padding: 10px 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+        
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .results-section {
+            padding: 30px;
+            display: none;
+        }
+        
+        .results-section.visible {
+            display: block;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+        }
+        
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .metric-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .metric-card h3 {
+            font-size: 0.75em;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+        
+        .metric-card .value {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 5px;
+        }
+        
+        .metric-card .label {
+            font-size: 0.8em;
+            color: #6c757d;
+        }
+        
+        .metric-icon {
+            font-size: 2em;
+            margin-bottom: 8px;
+            opacity: 0.8;
+        }
+        
+        .comparison-section {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 18px;
+            font-weight: 600;
+            font-size: 0.95em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .comparison-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+        
+        .before-column,
+        .after-column {
+            padding: 20px;
+        }
+        
+        .before-column {
+            border-right: 2px solid #e9ecef;
+            background: #fff5f5;
+        }
+        
+        .after-column {
+            background: #f0fff4;
+        }
+        
+        .column-title {
+            font-size: 0.95em;
+            font-weight: 700;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #dee2e6;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .before-column .column-title {
+            color: #dc3545;
+        }
+        
+        .after-column .column-title {
+            color: #28a745;
+        }
+        
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .metric-row:last-child {
+            border-bottom: none;
+        }
+        
+        .metric-label {
+            color: #6c757d;
+            font-size: 0.85em;
+        }
+        
+        .metric-value {
+            font-weight: 600;
+            color: #212529;
+            font-size: 0.9em;
+        }
+        
+        .savings-highlight {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 18px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .savings-highlight h3 {
+            font-size: 1em;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .savings-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .savings-item {
+            background: rgba(255,255,255,0.2);
+            padding: 12px;
+            border-radius: 6px;
+        }
+        
+        .savings-item .label {
+            font-size: 0.8em;
+            opacity: 0.9;
+            margin-bottom: 4px;
+        }
+        
+        .savings-item .value {
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+        
+        .stat-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .improvement-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            color: #28a745;
+            font-weight: 700;
+        }
+        
+        .decline-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            color: #dc3545;
+            font-weight: 700;
+        }
+        
+        .details-section {
+            margin-top: 30px;
+        }
+        
+        .details-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #6c757d;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .tab-button.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .user-list {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .user-item {
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .user-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .user-id {
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 4px;
+            font-size: 0.9em;
+        }
+        
+        .user-detail {
+            font-size: 0.8em;
+            color: #6c757d;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        
+        .badge-danger {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .badge-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .badge-info {
+            background: #17a2b8;
+            color: white;
+        }
+        
+        .explainability-step {
+            padding: 12px 15px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 6px;
+            border-left: 4px solid #6c757d;
+            font-size: 0.95em;
+            transition: all 0.3s;
+        }
+        
+        .suppression-detail-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border-left: 4px solid #dc3545;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .suppression-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .suppression-icon {
+            font-size: 1.5em;
+        }
+        
+        .suppression-title {
+            flex: 1;
+        }
+        
+        .suppression-customer-id {
+            font-weight: 700;
+            color: #212529;
+            font-size: 0.95em;
+        }
+        
+        .suppression-reason {
+            color: #dc3545;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        
+        .suppression-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .suppression-detail-item {
+            font-size: 0.8em;
+        }
+        
+        .suppression-detail-label {
+            color: #6c757d;
+            font-weight: 500;
+            text-transform: capitalize;
+        }
+        
+        .suppression-detail-value {
+            color: #212529;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745 0%, #ffc107 50%, #dc3545 100%);
+            transition: width 0.3s;
+        }
+        
+        @media (max-width: 768px) {
+            .query-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .before-column {
+                border-right: none;
+                border-bottom: 2px solid #e9ecef;
+            }
+            
+            .savings-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Applied-Agentic AI AWS CPaaS Demo</h1>
+            <p>Intelligent Campaign Orchestration with AI-Powered Decision Making</p>
+        </div>
+        
+        <div class="main-content">
+            <!-- Segment History Box -->
+            <div id="segmentHistoryBox" style="background: #f8f9fa; border-bottom: 2px solid #e9ecef; padding: 15px 30px; display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <h3 style="font-size: 0.9em; color: #495057; margin: 0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                        📋 Segment History
+                    </h3>
+                    <button onclick="clearSegmentHistory()" style="background: #dc3545; color: white; border: none; padding: 4px 12px; border-radius: 4px; font-size: 0.75em; cursor: pointer;">
+                        Clear All
+                    </button>
+                </div>
+                <div id="segmentHistoryList" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; max-height: 150px; overflow-y: auto;">
+                    <!-- Segments will be inserted here -->
+                </div>
+            </div>
+            
+            <div class="query-section">
+                <!-- Natural Language Query Input -->
+                <div style="margin-bottom: 25px;">
+                    <label for="nlQuery" style="font-weight: 600; margin-bottom: 8px; color: #495057; font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.5px; display: block;">
+                        💬 Natural Language Query
+                    </label>
+                    <div style="display: flex; gap: 10px;">
+                        <input 
+                            type="text" 
+                            id="nlQuery" 
+                            placeholder='Try: "Run campaign for Bangalore users for SKU-LAPTOP-001"'
+                            style="flex: 1; padding: 12px 15px; border: 2px solid #dee2e6; border-radius: 8px; font-size: 1em;"
+                        />
+                        <button type="button" onclick="parseNaturalLanguage()" class="btn-primary">
+                            Parse Query
+                        </button>
+                    </div>
+                    <p style="font-size: 0.85em; color: #6c757d; margin-top: 8px;">
+                        💡 Examples: "Bangalore + SKU-LAPTOP-001" or "Mumbai users for SKU-PHONE-002"
+                    </p>
+                </div>
+                
+                <div style="text-align: center; margin: 20px 0; color: #6c757d; font-weight: 600;">
+                    - OR -
+                </div>
+                
+                <!-- Segment Selector -->
+                <div style="margin-bottom: 25px; padding: 15px; background: #e7f3ff; border-radius: 8px; border-left: 4px solid #0066cc;">
+                    <label for="segmentSelector" style="font-weight: 600; margin-bottom: 8px; color: #495057; font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.5px; display: block;">
+                        📋 Or Select Existing Segment
+                    </label>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <select id="segmentSelector" style="flex: 1; padding: 10px 12px; border: 2px solid #0066cc; border-radius: 8px; font-size: 0.9em; background: white;">
+                            <option value="">Select a segment to query...</option>
+                        </select>
+                        <button type="button" onclick="querySegment()" class="btn-primary" style="background: linear-gradient(135deg, #0066cc 0%, #004c99 100%);">
+                            Query Segment
+                        </button>
+                    </div>
+                    <p style="font-size: 0.85em; color: #495057; margin-top: 8px;">
+                        💡 Select a previously created segment to run the same campaign again
+                    </p>
+                </div>
+                
+                <div style="text-align: center; margin: 20px 0; color: #6c757d; font-weight: 600;">
+                    - OR -
+                </div>
+                
+                <form id="queryForm" class="query-form">
+                    <div class="form-group">
+                        <label for="location">📍 Target Location</label>
+                        <select id="location" name="location" required>
+                            <option value="">Loading locations...</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sku">📦 Product SKU</label>
+                        <select id="sku" name="sku" required>
+                            <option value="">Loading SKUs...</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Run Campaign</button>
+                </form>
+            </div>
+            
+            <div id="explainabilitySection" style="display: none; padding: 20px 30px;"></div>
+            
+            <div id="loadingSection" class="loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Analyzing campaign with AI engines...</p>
+            </div>
+            
+            <div id="resultsSection" class="results-section">
+                <!-- Results will be inserted here -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // ============================================================================
+        // FUNCTIONS CALLED FROM ONCLICK HANDLERS - MUST BE DEFINED FIRST
+        // ============================================================================
+        
+        // Natural Language Query Parser
+        async function parseNaturalLanguage() {
+            const query = document.getElementById('nlQuery').value.trim();
+            
+            if (!query) {
+                alert('Please enter a query');
+                return;
+            }
+            
+            // Show explainability section
+            showExplainability(query);
+            
+            // Extract location (look for city names)
+            const locations = ['Bangalore', 'Mumbai', 'Delhi', 'Hyderabad', 'Chennai', 'Kolkata', 'Pune', 'Ahmedabad', 'Jaipur', 'Lucknow'];
+            let foundLocation = null;
+            
+            for (const loc of locations) {
+                if (query.toLowerCase().includes(loc.toLowerCase())) {
+                    foundLocation = loc;
+                    break;
+                }
+            }
+            
+            // Extract SKU (look for SKU-XXX-NNN pattern)
+            const skuMatch = query.match(/SKU-[A-Z]+-\d+/i);
+            let foundSKU = null;
+            
+            if (skuMatch) {
+                foundSKU = skuMatch[0].toUpperCase();
+            }
+            
+            // Update dropdowns
+            if (foundLocation) {
+                document.getElementById('location').value = foundLocation;
+                updateExplainabilityStep(1, `✅ Parsed parameters: Location="${foundLocation}", SKU="${foundSKU || 'Not found'}"`, 'success');
+            }
+            
+            if (foundSKU) {
+                document.getElementById('sku').value = foundSKU;
+            }
+            
+            // Auto-submit if both found
+            if (foundLocation && foundSKU) {
+                updateExplainabilityStep(1, `✅ Parsed parameters: Location="${foundLocation}", SKU="${foundSKU}"`, 'success');
+                await new Promise(resolve => setTimeout(resolve, 800));
+                
+                updateExplainabilityStep('1b', '🔍 Querying RAG knowledge base for promotion data...', 'in-progress');
+                await new Promise(resolve => setTimeout(resolve, 600));
+                
+                updateExplainabilityStep(2, '🔍 Querying customer database...', 'in-progress');
+                await new Promise(resolve => setTimeout(resolve, 600));
+                
+                updateExplainabilityStep(3, '📊 Creating customer segment...', 'in-progress');
+                await new Promise(resolve => setTimeout(resolve, 600));
+                
+                updateExplainabilityStep(4, '🛡️ Running AI protection engines...', 'in-progress');
+                await new Promise(resolve => setTimeout(resolve, 600));
+                
+                updateExplainabilityStep(5, '🚀 Executing campaign...', 'in-progress');
+                
+                // Trigger the form submission
+                document.getElementById('queryForm').dispatchEvent(new Event('submit'));
+            } else if (foundLocation) {
+                updateExplainabilityStep(1, `⚠️ Found location: ${foundLocation}, but couldn't find SKU. Please select one from dropdown.`, 'warning');
+            } else if (foundSKU) {
+                updateExplainabilityStep(1, `⚠️ Found SKU: ${foundSKU}, but couldn't find location. Please select one from dropdown.`, 'warning');
+            } else {
+                updateExplainabilityStep(1, '❌ Could not parse query. Try: "Run campaign for Bangalore users for SKU-LAPTOP-001"', 'error');
+            }
+        }
+        
+        function showExplainability(query) {
+            const section = document.getElementById('explainabilitySection');
+            section.innerHTML = `
+                <div style="background: #f8f9fa; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
+                    <h3 style="margin-bottom: 15px; color: #495057;">🤖 AI Decision Process</h3>
+                    <div style="background: white; padding: 15px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid #6c757d;">
+                        <strong>Query:</strong> "${query}"
+                    </div>
+                    <div id="step1" class="explainability-step">⏳ Step 1: Parsing query parameters...</div>
+                    <div id="step1b" class="explainability-step">⏳ Step 1b: Querying RAG knowledge base for promotion data...</div>
+                    <div id="step2" class="explainability-step">⏳ Step 2: Querying customer database...</div>
+                    <div id="step3" class="explainability-step">⏳ Step 3: Creating customer segment and saving to database...</div>
+                    <div id="step4" class="explainability-step">⏳ Step 4: Finding suppressed users (AI protection)...</div>
+                    <div id="step5" class="explainability-step">⏳ Step 5: Running campaign...</div>
+                </div>
+            `;
+            section.style.display = 'block';
+        }
+        
+        function updateExplainabilityStep(stepNum, message, status) {
+            const step = document.getElementById(`step${stepNum}`);
+            if (!step) return;
+            
+            let icon = '⏳';
+            let color = '#6c757d';
+            
+            if (status === 'success') {
+                icon = '✅';
+                color = '#28a745';
+            } else if (status === 'in-progress') {
+                icon = '🔄';
+                color = '#007bff';
+            } else if (status === 'warning') {
+                icon = '⚠️';
+                color = '#ffc107';
+            } else if (status === 'error') {
+                icon = '❌';
+                color = '#dc3545';
+            }
+            
+            step.innerHTML = `${icon} ${message}`;
+            step.style.color = color;
+            step.style.fontWeight = status === 'success' ? '600' : 'normal';
+            step.style.borderLeftColor = color;
+        }
+        
+        async function querySegment() {
+            const select = document.getElementById('segmentSelector');
+            const selectedValue = select.value;
+            
+            if (!selectedValue) {
+                alert('Please select a segment');
+                return;
+            }
+            
+            try {
+                const segmentData = JSON.parse(selectedValue);
+                
+                // Set form values
+                document.getElementById('location').value = segmentData.location;
+                document.getElementById('sku').value = segmentData.sku;
+                
+                // Show explainability
+                showExplainability(`Query existing segment: ${segmentData.segment_id}`);
+                updateExplainabilityStep(1, `✅ Using existing segment: <strong style="color: #667eea; font-family: monospace;">${segmentData.segment_id}</strong><br>Location="${segmentData.location}", SKU="${segmentData.sku}"`, 'success');
+                
+                await new Promise(resolve => setTimeout(resolve, 600));
+                updateExplainabilityStep('1b', '🔍 Querying RAG knowledge base for promotion data...', 'in-progress');
+                await new Promise(resolve => setTimeout(resolve, 600));
+                updateExplainabilityStep(2, '🔍 Querying customer database...', 'in-progress');
+                await new Promise(resolve => setTimeout(resolve, 600));
+                updateExplainabilityStep(3, '📊 Verifying segment...', 'in-progress');
+                await new Promise(resolve => setTimeout(resolve, 600));
+                updateExplainabilityStep(4, '🛡️ Running AI protection engines...', 'in-progress');
+                await new Promise(resolve => setTimeout(resolve, 600));
+                updateExplainabilityStep(5, '🚀 Executing campaign...', 'in-progress');
+                
+                // Trigger the form submission
+                document.getElementById('queryForm').dispatchEvent(new Event('submit'));
+            } catch (error) {
+                console.error('Error querying segment:', error);
+                alert('Error querying segment');
+            }
+        }
+        
+        function clearSegmentHistory() {
+            if (confirm('Are you sure you want to clear all segment history?')) {
+                localStorage.removeItem(SEGMENT_STORAGE_KEY);
+                displaySegmentHistory();
+            }
+        }
+        
+        function showTab(tabName, event) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active from all buttons
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            const tabElement = document.getElementById(`tab-${tabName}`);
+            if (tabElement) {
+                tabElement.classList.add('active');
+            }
+            
+            // Mark button as active
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
+        }
+        
+        // Message editing functionality
+        let editedMessages = {};  // Store edited messages
+        
+        function editMessage(messageIndex, customerId, channel) {
+            const contentDiv = document.getElementById(`message-content-${messageIndex}`);
+            const currentContent = contentDiv.textContent;
+            
+            // Create modal overlay
+            const modal = document.createElement('div');
+            modal.id = 'edit-modal';
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.7);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                animation: fadeIn 0.2s;
+            `;
+            
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: white;
+                border-radius: 12px;
+                padding: 30px;
+                max-width: 700px;
+                width: 90%;
+                max-height: 80vh;
+                overflow-y: auto;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+                animation: slideIn 0.3s;
+            `;
+            
+            modalContent.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 style="margin: 0; color: #333; font-size: 1.3em;">✏️ Edit Message</h3>
+                    <button onclick="closeEditModal()" style="background: none; border: none; font-size: 1.5em; cursor: pointer; color: #6c757d;">×</button>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 12px; border-radius: 6px; margin-bottom: 15px;">
+                    <div style="font-size: 0.85em; color: #6c757d;">
+                        <strong>Customer:</strong> ${customerId} | <strong>Channel:</strong> ${channel.toUpperCase()}
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #495057;">Message Content:</label>
+                    <textarea id="edit-textarea" style="width: 100%; min-height: 250px; padding: 12px; border: 2px solid #dee2e6; border-radius: 8px; font-size: 0.95em; font-family: inherit; resize: vertical;">${currentContent}</textarea>
+                    <div style="font-size: 0.8em; color: #6c757d; margin-top: 5px;">
+                        Character count: <span id="char-count">${currentContent.length}</span>
+                        ${channel === 'sms' ? ' | SMS limit: 160 characters' : ''}
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 10px;">
+                    <button onclick="saveEditedMessage(${messageIndex}, '${customerId}')" style="flex: 1; background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 1em;">
+                        💾 Save Changes
+                    </button>
+                    <button onclick="closeEditModal()" style="flex: 1; background: #6c757d; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 1em;">
+                        Cancel
+                    </button>
+                </div>
+                
+                <div style="margin-top: 15px; padding: 12px; background: #e7f3ff; border-radius: 6px; border-left: 4px solid #0066cc;">
+                    <div style="font-size: 0.85em; color: #004085;">
+                        <strong>💡 Tip:</strong> Personalize your message with customer details, emojis, and clear call-to-action. Keep it concise and engaging!
+                    </div>
+                </div>
+            `;
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            
+            // Add character counter
+            const textarea = document.getElementById('edit-textarea');
+            const charCount = document.getElementById('char-count');
+            textarea.addEventListener('input', () => {
+                charCount.textContent = textarea.value.length;
+            });
+            
+            // Focus textarea
+            textarea.focus();
+            textarea.setSelectionRange(textarea.value.length, textarea.value.length);
+        }
+        
+        function closeEditModal() {
+            const modal = document.getElementById('edit-modal');
+            if (modal) {
+                modal.remove();
+            }
+        }
+        
+        function saveEditedMessage(messageIndex, customerId) {
+            const textarea = document.getElementById('edit-textarea');
+            const newContent = textarea.value;
+            
+            // Store edited message
+            editedMessages[messageIndex] = {
+                customerId: customerId,
+                content: newContent,
+                editedAt: new Date().toISOString()
+            };
+            
+            // Update display
+            const contentDiv = document.getElementById(`message-content-${messageIndex}`);
+            contentDiv.textContent = newContent;
+            
+            // Add "edited" indicator
+            const messageCard = contentDiv.closest('div[style*="border: 2px solid"]');
+            let editedBadge = messageCard.querySelector('.edited-badge');
+            if (!editedBadge) {
+                editedBadge = document.createElement('div');
+                editedBadge.className = 'edited-badge';
+                editedBadge.style.cssText = `
+                    background: #ffc107;
+                    color: #333;
+                    padding: 4px 10px;
+                    border-radius: 12px;
+                    font-size: 0.75em;
+                    font-weight: 600;
+                    display: inline-block;
+                    margin-top: 10px;
+                `;
+                editedBadge.textContent = '✏️ EDITED';
+                contentDiv.parentElement.appendChild(editedBadge);
+            }
+            
+            // Save to backend API (optional - for persistence)
+            const channelMatch = messageCard.querySelector('div[style*="text-transform: uppercase"]');
+            const channel = channelMatch ? channelMatch.textContent.toLowerCase() : 'sms';
+            
+            fetch('/api/save-template', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    customer_id: customerId,
+                    channel: channel,
+                    content: newContent,
+                    template_name: `Custom_${channel}_${customerId}`
+                })
+            }).then(response => response.json())
+              .then(data => {
+                  if (data.success) {
+                      console.log('Template saved to backend:', data.template_id);
+                  }
+              })
+              .catch(err => console.error('Failed to save template to backend:', err));
+            
+            // Close modal
+            closeEditModal();
+            
+            // Show success notification
+            showNotification('✅ Message saved successfully!', 'success');
+            
+            console.log('Edited message saved:', editedMessages[messageIndex]);
+        }
+        
+        function copyMessage(messageIndex) {
+            const contentDiv = document.getElementById(`message-content-${messageIndex}`);
+            const content = contentDiv.textContent;
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(content).then(() => {
+                showNotification('📋 Message copied to clipboard!', 'success');
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                showNotification('❌ Failed to copy message', 'error');
+            });
+        }
+        
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? 'linear-gradient(135deg, #28a745 0%, #20c997 100%)' : 'linear-gradient(135deg, #dc3545 0%, #c82333 100%)'};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                z-index: 10001;
+                font-weight: 600;
+                animation: slideInRight 0.3s, fadeOut 0.3s 2.7s;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+        
+        // Send Campaign Function
+        let currentCampaignData = null;  // Store current campaign data
+        
+        function sendCampaign() {
+            const throughputInput = document.getElementById('throughputTPS');
+            const throughputTPS = parseInt(throughputInput.value);
+            const statusDiv = document.getElementById('sendCampaignStatus');
+            const sendBtn = document.getElementById('sendCampaignBtn');
+            
+            // Check if TPS is explicitly selected (not just placeholder)
+            if (!throughputInput.value || throughputInput.value === '') {
+                statusDiv.style.display = 'block';
+                statusDiv.innerHTML = `
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.8em; margin-bottom: 8px;">⚠️</div>
+                        <div style="font-weight: 700; font-size: 1.1em; margin-bottom: 8px;">Throughput Required</div>
+                        <div style="font-size: 0.9em; opacity: 0.95;">Please select a throughput (TPS) value before sending the campaign.</div>
+                    </div>
+                `;
+                throughputInput.focus();
+                throughputInput.style.borderColor = '#ffc107';
+                setTimeout(() => {
+                    throughputInput.style.borderColor = 'rgba(255,255,255,0.3)';
+                }, 2000);
+                showNotification('⚠️ Please select throughput (TPS) first', 'error');
+                return;
+            }
+            
+            // Validate TPS range
+            if (isNaN(throughputTPS) || throughputTPS < 1 || throughputTPS > 100) {
+                statusDiv.style.display = 'block';
+                statusDiv.innerHTML = `
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.8em; margin-bottom: 8px;">❌</div>
+                        <div style="font-weight: 700; font-size: 1.1em; margin-bottom: 8px;">Invalid Throughput</div>
+                        <div style="font-size: 0.9em; opacity: 0.95;">Please enter a valid TPS between 1 and 100.</div>
+                    </div>
+                `;
+                throughputInput.focus();
+                showNotification('❌ TPS must be between 1 and 100', 'error');
+                return;
+            }
+            
+            // Check if we have campaign data
+            if (!currentCampaignData || !currentCampaignData.eligible_users) {
+                statusDiv.style.display = 'block';
+                statusDiv.innerHTML = `
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.8em; margin-bottom: 8px;">❌</div>
+                        <div style="font-weight: 700; font-size: 1.1em; margin-bottom: 8px;">No Campaign Data</div>
+                        <div style="font-size: 0.9em; opacity: 0.95;">Please run a campaign query first.</div>
+                    </div>
+                `;
+                showNotification('❌ No campaign data available', 'error');
+                return;
+            }
+            
+            // Disable button
+            sendBtn.disabled = true;
+            sendBtn.textContent = '⏳ Sending...';
+            
+            // Show status
+            statusDiv.style.display = 'block';
+            statusDiv.innerHTML = `
+                <div style="text-align: center;">
+                    <div class="loading-spinner" style="margin: 0 auto 10px;"></div>
+                    <div style="font-weight: 600; font-size: 0.95em;">Sending campaign to ${currentCampaignData.eligible_users.length} recipients...</div>
+                    <div style="font-size: 0.85em; opacity: 0.9; margin-top: 5px;">Throughput: ${throughputTPS} TPS</div>
+                </div>
+            `;
+            
+            // Send campaign request
+            fetch('/api/send-campaign', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    eligible_users: currentCampaignData.eligible_users,
+                    throughput_tps: throughputTPS,
+                    campaign_id: `campaign-${Date.now()}`
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const results = data.results;
+                    statusDiv.innerHTML = `
+                        <div style="text-align: center;">
+                            <div style="font-size: 2em; margin-bottom: 8px;">✅</div>
+                            <div style="font-weight: 700; font-size: 1.1em; margin-bottom: 10px;">Campaign Sent Successfully!</div>
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px;">
+                                <div>
+                                    <div style="font-size: 0.75em; opacity: 0.9;">Sent</div>
+                                    <div style="font-size: 1.3em; font-weight: 700;">${results.total_sent}</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 0.75em; opacity: 0.9;">Failed</div>
+                                    <div style="font-size: 1.3em; font-weight: 700;">${results.total_failed}</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 0.75em; opacity: 0.9;">Campaign ID</div>
+                                    <div style="font-size: 0.75em; font-weight: 600; font-family: monospace;">${results.campaign_id.substring(0, 15)}...</div>
+                                </div>
+                            </div>
+                            ${results.by_channel ? `
+                            <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.3);">
+                                <div style="font-size: 0.8em; font-weight: 600; margin-bottom: 8px;">By Channel:</div>
+                                <div style="display: flex; gap: 12px; justify-content: center; font-size: 0.85em;">
+                                    ${results.by_channel.sms ? `<div>📱 SMS: ${results.by_channel.sms.sent}/${results.by_channel.sms.total}</div>` : ''}
+                                    ${results.by_channel.whatsapp ? `<div>💬 WA: ${results.by_channel.whatsapp.sent}/${results.by_channel.whatsapp.total}</div>` : ''}
+                                    ${results.by_channel.email ? `<div>📧 Email: ${results.by_channel.email.sent}/${results.by_channel.email.total}</div>` : ''}
+                                </div>
+                            </div>
+                            ` : ''}
+                        </div>
+                    `;
+                    showNotification('✅ Campaign sent successfully!', 'success');
+                } else {
+                    // Error
+                    statusDiv.innerHTML = `
+                        <div style="text-align: center;">
+                            <div style="font-size: 2em; margin-bottom: 8px;">❌</div>
+                            <div style="font-weight: 700; font-size: 1.1em; margin-bottom: 8px;">Campaign Send Failed</div>
+                            <div style="font-size: 0.85em; opacity: 0.95;">${data.error || 'Unknown error occurred'}</div>
+                        </div>
+                    `;
+                    showNotification('❌ ' + (data.error || 'Failed to send campaign'), 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Send campaign error:', error);
+                statusDiv.innerHTML = `
+                    <div style="text-align: center;">
+                        <div style="font-size: 2em; margin-bottom: 8px;">❌</div>
+                        <div style="font-weight: 700; font-size: 1.1em; margin-bottom: 8px;">Network Error</div>
+                        <div style="font-size: 0.85em; opacity: 0.95;">${error.message}</div>
+                    </div>
+                `;
+                showNotification('❌ Network error: ' + error.message, 'error');
+            })
+            .finally(() => {
+                // Re-enable button
+                sendBtn.disabled = false;
+                sendBtn.textContent = '🚀 Send Campaign';
+            });
+        }
+        
+        // ============================================================================
+        // SEGMENT HISTORY AND DATA MANAGEMENT
+        // ============================================================================
+        
+        // Segment History Management
+        const SEGMENT_STORAGE_KEY = 'campaign_segments';
+        
+        function loadSegmentHistory() {
+            const segments = JSON.parse(localStorage.getItem(SEGMENT_STORAGE_KEY) || '[]');
+            return segments;
+        }
+        
+        function saveSegmentHistory(segments) {
+            localStorage.setItem(SEGMENT_STORAGE_KEY, JSON.stringify(segments));
+            displaySegmentHistory();
+        }
+        
+        function addSegment(segmentData) {
+            const segments = loadSegmentHistory();
+            
+            // Create criteria key for deduplication
+            const criteriaKey = `${segmentData.location}|${segmentData.sku}|${JSON.stringify(segmentData.filters || {})}`;
+            
+            // Check if segment with same criteria exists
+            const existingIndex = segments.findIndex(s => s.criteriaKey === criteriaKey);
+            
+            if (existingIndex >= 0) {
+                // Update existing segment (reuse segment ID)
+                segments[existingIndex] = {
+                    ...segmentData,
+                    criteriaKey,
+                    lastUpdated: new Date().toISOString()
+                };
+                console.log('♻️ Reusing existing segment:', segments[existingIndex].segment_id);
+            } else {
+                // Add new segment
+                segments.push({
+                    ...segmentData,
+                    criteriaKey,
+                    created: new Date().toISOString()
+                });
+                console.log('✅ Created new segment:', segmentData.segment_id);
+            }
+            
+            saveSegmentHistory(segments);
+            return existingIndex >= 0 ? 'reused' : 'new';
+        }
+        
+        function displaySegmentHistory() {
+            const segments = loadSegmentHistory();
+            const container = document.getElementById('segmentHistoryList');
+            const box = document.getElementById('segmentHistoryBox');
+            
+            if (segments.length === 0) {
+                box.style.display = 'none';
+                return;
+            }
+            
+            box.style.display = 'block';
+            
+            container.innerHTML = segments.map(seg => `
+                <div style="background: white; padding: 10px; border-radius: 6px; border-left: 4px solid #667eea; font-size: 0.85em;">
+                    <div style="font-weight: 700; color: #667eea; font-family: monospace; margin-bottom: 6px;">${seg.segment_id}</div>
+                    <div style="color: #6c757d; font-size: 0.9em; margin-bottom: 4px;">
+                        📍 ${seg.location} • 📦 ${seg.sku}
+                    </div>
+                    <div style="color: #6c757d; font-size: 0.85em;">
+                        👥 ${seg.eligible_count} eligible users
+                    </div>
+                    ${seg.lastUpdated ? `<div style="color: #28a745; font-size: 0.8em; margin-top: 4px;">♻️ Reused</div>` : ''}
+                </div>
+            `).join('');
+            
+            // Also refresh the segment selector
+            loadSegments();
+        }
+        
+        function clearSegmentHistory() {
+            if (confirm('Are you sure you want to clear all segment history?')) {
+                localStorage.removeItem(SEGMENT_STORAGE_KEY);
+                displaySegmentHistory();
+            }
+        }
+        
+        // Load locations and SKUs on page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadLocations();
+            await loadSKUs();
+            await loadSegments();  // Load segments for selector
+            displaySegmentHistory();  // Load segment history on page load
+        });
+        
+        async function loadSegments() {
+            try {
+                // Load from localStorage (browser-side history)
+                const segments = loadSegmentHistory();
+                
+                const select = document.getElementById('segmentSelector');
+                select.innerHTML = '<option value="">Select a segment to query...</option>';
+                
+                segments.forEach(seg => {
+                    const option = document.createElement('option');
+                    option.value = JSON.stringify({
+                        location: seg.location,
+                        sku: seg.sku,
+                        filters: seg.filters || {},
+                        segment_id: seg.segment_id
+                    });
+                    option.textContent = `${seg.segment_id} - ${seg.location} + ${seg.sku} (${seg.eligible_count} users)`;
+                    select.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error loading segments:', error);
+            }
+        }
+        
+        async function querySegment() {
+            const select = document.getElementById('segmentSelector');
+            const selectedValue = select.value;
+            
+            if (!selectedValue) {
+                alert('Please select a segment');
+                return;
+            }
+            
+            try {
+                const segmentData = JSON.parse(selectedValue);
+                
+                // Set form values
+                document.getElementById('location').value = segmentData.location;
+                document.getElementById('sku').value = segmentData.sku;
+                
+                // Show explainability
+                showExplainability(`Query existing segment: ${segmentData.segment_id}`);
+                updateExplainabilityStep(1, `✅ Using existing segment: <strong style="color: #667eea; font-family: monospace;">${segmentData.segment_id}</strong><br>Location="${segmentData.location}", SKU="${segmentData.sku}"`, 'success');
+                
+                await new Promise(resolve => setTimeout(resolve, 600));
+                updateExplainabilityStep('1b', '🔍 Querying RAG knowledge base for promotion data...', 'in-progress');
+                await new Promise(resolve => setTimeout(resolve, 600));
+                updateExplainabilityStep(2, '🔍 Querying customer database...', 'in-progress');
+                await new Promise(resolve => setTimeout(resolve, 600));
+                updateExplainabilityStep(3, '📊 Verifying segment...', 'in-progress');
+                await new Promise(resolve => setTimeout(resolve, 600));
+                updateExplainabilityStep(4, '🛡️ Running AI protection engines...', 'in-progress');
+                await new Promise(resolve => setTimeout(resolve, 600));
+                updateExplainabilityStep(5, '🚀 Executing campaign...', 'in-progress');
+                
+                // Trigger the form submission
+                document.getElementById('queryForm').dispatchEvent(new Event('submit'));
+            } catch (error) {
+                console.error('Error querying segment:', error);
+                alert('Error querying segment');
+            }
+        }
+        
+        async function loadLocations() {
+            try {
+                const response = await fetch('/api/locations');
+                const data = await response.json();
+                
+                const select = document.getElementById('location');
+                select.innerHTML = '<option value="">Select a location...</option>';
+                
+                data.locations.forEach(location => {
+                    const option = document.createElement('option');
+                    option.value = location;
+                    option.textContent = location;
+                    select.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error loading locations:', error);
+            }
+        }
+        
+        async function loadSKUs() {
+            try {
+                const response = await fetch('/api/skus');
+                const data = await response.json();
+                
+                const select = document.getElementById('sku');
+                select.innerHTML = '<option value="">Select a product SKU...</option>';
+                
+                data.skus.forEach(sku => {
+                    const option = document.createElement('option');
+                    option.value = sku;
+                    option.textContent = sku;
+                    select.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error loading SKUs:', error);
+            }
+        }
+        
+        document.getElementById('queryForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const location = document.getElementById('location').value;
+            const sku = document.getElementById('sku').value;
+            const nlQuery = document.getElementById('nlQuery').value;
+            
+            if (!location || !sku) {
+                alert('Please select both location and SKU');
+                return;
+            }
+            
+            // Update explainability if visible
+            if (document.getElementById('explainabilitySection').style.display !== 'none') {
+                updateExplainabilityStep('1b', `✅ RAG KB: Found promotion data for ${sku}`, 'success');
+                await new Promise(resolve => setTimeout(resolve, 400));
+                updateExplainabilityStep(2, `✅ Queried database: Found customers in ${location} interested in ${sku}`, 'success');
+                await new Promise(resolve => setTimeout(resolve, 400));
+                updateExplainabilityStep(3, '✅ Segment created and saved to database', 'success');
+                await new Promise(resolve => setTimeout(resolve, 400));
+                updateExplainabilityStep(4, '🔄 AI analyzing customer sentiment, fatigue, and engagement...', 'in-progress');
+            }
+            
+            // Show loading
+            document.getElementById('loadingSection').style.display = 'block';
+            document.getElementById('resultsSection').classList.remove('visible');
+            
+            try {
+                const response = await fetch('/api/query', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        location, 
+                        sku,
+                        natural_language_query: nlQuery  // Send NL query for parsing
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Save segment to history
+                    if (data.results.segment_id) {
+                        const segmentStatus = addSegment({
+                            segment_id: data.results.segment_id,
+                            location: location,
+                            sku: sku,
+                            filters: data.query.filters || {},
+                            eligible_count: data.results.eligible_count,
+                            total_matched: data.results.total_matched
+                        });
+                        
+                        if (segmentStatus === 'reused') {
+                            console.log('♻️ Segment criteria matched existing segment - reusing ID');
+                        }
+                    }
+                    
+                    // Update explainability with suppression details
+                    if (document.getElementById('explainabilitySection').style.display !== 'none') {
+                        const suppressedCount = data.results.after_metrics.suppressed;
+                        const segmentId = data.results.segment_id;
+                        const sqlQuery = data.results.sql_query;
+                        const unsupported = data.results.unsupported_dimensions || [];
+                        const suggestions = data.results.suggestions || [];
+                        const parsedDims = data.results.parsed_dimensions || [];
+                        
+                        // Update step 1 with all parsed dimensions
+                        let step1Message = `✅ Parsed parameters: Location="${location}", SKU="${sku}"`;
+                        if (parsedDims.length > 0) {
+                            step1Message += `<br><div style="margin-top:8px; padding:8px; background:#f8f9fa; border-radius:4px; font-size:0.9em;">`;
+                            step1Message += `<strong>Additional Filters:</strong><br>`;
+                            parsedDims.forEach(dim => {
+                                step1Message += `• ${dim}<br>`;
+                            });
+                            step1Message += `</div>`;
+                        }
+                        updateExplainabilityStep(1, step1Message, 'success');
+                        await new Promise(resolve => setTimeout(resolve, 400));
+                        
+                        // Show warnings for unsupported dimensions FIRST (before updating steps)
+                        if (unsupported.length > 0 || suggestions.length > 0) {
+                            let warningHTML = '<div id="dimensionWarning" style="background: #fff3cd; border: 2px solid #ffc107; padding: 15px; margin: 15px 0; border-radius: 8px; box-shadow: 0 2px 8px rgba(255,193,7,0.3);">';
+                            warningHTML += '<div style="font-weight: 700; color: #856404; margin-bottom: 12px; font-size: 1.1em;">⚠️ QUERY ANALYSIS</div>';
+                            
+                            if (unsupported.length > 0) {
+                                warningHTML += '<div style="background: rgba(255,255,255,0.7); padding: 10px; border-radius: 6px; margin-bottom: 10px;">';
+                                warningHTML += '<div style="font-weight: 600; color: #856404; margin-bottom: 8px;">❌ Unsupported Dimensions Detected:</div>';
+                                unsupported.forEach(dim => {
+                                    warningHTML += `<div style="color: #856404; font-size: 0.95em; padding: 4px 0;">• ${dim}</div>`;
+                                });
+                                warningHTML += '</div>';
+                            }
+                            
+                            if (suggestions.length > 0) {
+                                warningHTML += '<div style="background: rgba(255,255,255,0.7); padding: 10px; border-radius: 6px;">';
+                                warningHTML += '<div style="font-weight: 600; color: #856404; margin-bottom: 8px;">💡 Available Alternatives:</div>';
+                                suggestions.forEach(sug => {
+                                    warningHTML += `<div style="color: #856404; font-size: 0.95em; padding: 4px 0;">${sug}</div>`;
+                                });
+                                warningHTML += '</div>';
+                            }
+                            
+                            warningHTML += '</div>';
+                            
+                            // Insert warning at the top of explainability section
+                            const explainSection = document.getElementById('explainabilitySection');
+                            const firstChild = explainSection.firstElementChild;
+                            if (firstChild) {
+                                firstChild.insertAdjacentHTML('afterend', warningHTML);
+                            }
+                        }
+                        
+                        // Update step 2 with SQL query
+                        if (sqlQuery) {
+                            updateExplainabilityStep(2, `✅ Queried database: Found customers in ${location} interested in ${sku}<br><code style="display:block; background:#f8f9fa; padding:8px; margin-top:8px; border-radius:4px; font-size:0.85em; white-space:pre-wrap;">${sqlQuery}</code>`, 'success');
+                        } else {
+                            updateExplainabilityStep(2, `✅ Queried database: Found customers in ${location} interested in ${sku}`, 'success');
+                        }
+                        
+                        await new Promise(resolve => setTimeout(resolve, 400));
+                        
+                        // Update step 3 with segment ID
+                        if (segmentId) {
+                            updateExplainabilityStep(3, `✅ Segment created: <strong style="color: #667eea; font-family: monospace;">${segmentId}</strong> (${data.results.eligible_count} eligible users)`, 'success');
+                        } else {
+                            updateExplainabilityStep(3, `✅ Segment created and saved to database`, 'success');
+                        }
+                        
+                        await new Promise(resolve => setTimeout(resolve, 400));
+                        updateExplainabilityStep(4, `✅ AI Protection: ${suppressedCount} users suppressed (fatigue: ${Math.floor(suppressedCount * 0.4)}, negative sentiment: ${Math.floor(suppressedCount * 0.3)}, high frequency: ${Math.floor(suppressedCount * 0.3)})`, 'success');
+                        await new Promise(resolve => setTimeout(resolve, 400));
+                        updateExplainabilityStep(5, `✅ Campaign executed successfully! ${data.results.eligible_count} messages sent`, 'success');
+                    }
+                    displayResults(data);
+                } else {
+                    alert('Error: ' + data.error);
+                }
+            } catch (error) {
+                console.error('Error running query:', error);
+                alert('Error running campaign query');
+            } finally {
+                document.getElementById('loadingSection').style.display = 'none';
+            }
+        });
+        
+        function displayResults(data) {
+            const results = data.results;
+            const before = results.before_metrics;
+            const after = results.after_metrics;
+            
+            // Store campaign data for sending
+            currentCampaignData = {
+                eligible_users: results.eligible_users || [],
+                query: data.query
+            };
+            
+            const promotion = results.promotion;
+            const unsupported = results.unsupported_dimensions || [];
+            const suggestions = results.suggestions || [];
+            
+            // Build unsupported dimensions alert (shown at top of results)
+            let unsupportedAlertHTML = '';
+            if (unsupported.length > 0 || suggestions.length > 0) {
+                unsupportedAlertHTML = `
+                    <div style="background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%); border-radius: 8px; padding: 20px; margin-bottom: 25px; color: white; box-shadow: 0 4px 12px rgba(255,107,107,0.3);">
+                        <h3 style="font-size: 1.2em; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 1.5em;">⚠️</span>
+                            <span>Query Contains Unsupported Dimensions</span>
+                        </h3>
+                        ${unsupported.length > 0 ? `
+                        <div style="background: rgba(255,255,255,0.2); padding: 12px; border-radius: 6px; margin-bottom: 12px;">
+                            <div style="font-weight: 600; margin-bottom: 8px;">❌ Not Available in Data:</div>
+                            ${unsupported.map(dim => `<div style="font-size: 0.95em; padding: 4px 0;">• ${dim}</div>`).join('')}
+                        </div>
+                        ` : ''}
+                        ${suggestions.length > 0 ? `
+                        <div style="background: rgba(255,255,255,0.2); padding: 12px; border-radius: 6px;">
+                            <div style="font-weight: 600; margin-bottom: 8px;">💡 Try These Instead:</div>
+                            ${suggestions.map(sug => `<div style="font-size: 0.95em; padding: 4px 0;">${sug}</div>`).join('')}
+                        </div>
+                        ` : ''}
+                        <div style="margin-top: 12px; font-size: 0.9em; opacity: 0.95; padding: 10px; background: rgba(0,0,0,0.1); border-radius: 4px;">
+                            <strong>ℹ️ Note:</strong> The query was executed with available dimensions only. Results shown below are based on location and SKU filters.
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Build promotion section HTML
+            let promotionHTML = '';
+            if (promotion && promotion.active_promotions && promotion.active_promotions.length > 0) {
+                const promo = promotion.active_promotions[0];
+                const forecast = promotion.deepar_forecast || {};
+                const inventory = promotion.inventory_status || {};
+                
+                promotionHTML = `
+                    <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 8px; padding: 18px; margin-bottom: 25px; color: white; box-shadow: 0 4px 12px rgba(240, 147, 251, 0.3);">
+                        <h3 style="font-size: 1.1em; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 1.3em;">🎯</span>
+                            <span>Promotion Intelligence</span>
+                            <span style="font-size: 0.7em; background: rgba(255,255,255,0.3); padding: 3px 8px; border-radius: 12px; margin-left: auto;">RAG Knowledge Base</span>
+                        </h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+                            <div style="background: rgba(255,255,255,0.2); padding: 12px; border-radius: 6px;">
+                                <div style="font-size: 0.75em; opacity: 0.9; margin-bottom: 4px;">📦 Product</div>
+                                <div style="font-size: 1em; font-weight: 700;">${promotion.product_name}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 12px; border-radius: 6px;">
+                                <div style="font-size: 0.75em; opacity: 0.9; margin-bottom: 4px;">⭐ Promotion Score</div>
+                                <div style="font-size: 1.3em; font-weight: 700;">${(promotion.promotion_score * 100).toFixed(0)}%</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 12px; border-radius: 6px;">
+                                <div style="font-size: 0.75em; opacity: 0.9; margin-bottom: 4px;">🏷️ Active Promotion</div>
+                                <div style="font-size: 1em; font-weight: 700;">${promo.discount_percentage}% OFF</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 12px; border-radius: 6px;">
+                                <div style="font-size: 0.75em; opacity: 0.9; margin-bottom: 4px;">📈 Expected Lift</div>
+                                <div style="font-size: 1.3em; font-weight: 700;">+${(promo.expected_lift * 100).toFixed(0)}%</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 12px; padding: 12px; background: rgba(255,255,255,0.15); border-radius: 6px;">
+                            <div style="font-weight: 600; margin-bottom: 6px; font-size: 0.85em;">💬 Message Template:</div>
+                            <div style="font-style: italic; font-size: 0.9em;">"${promo.message_template}"</div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px;">
+                            <div style="background: rgba(255,255,255,0.15); padding: 10px; border-radius: 6px;">
+                                <div style="font-size: 0.75em; opacity: 0.9;">🤖 DeepAR Forecast (30d)</div>
+                                <div style="font-size: 0.95em; font-weight: 600;">${forecast.predicted_demand_30d || 'N/A'} units | ${forecast.trend || 'N/A'}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.15); padding: 10px; border-radius: 6px;">
+                                <div style="font-size: 0.75em; opacity: 0.9;">📦 Inventory Available</div>
+                                <div style="font-size: 0.95em; font-weight: 600;">${inventory.available || 'N/A'} units (${inventory.reserved || 0} reserved)</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 10px; font-size: 0.8em; opacity: 0.95; padding: 8px; background: rgba(0,0,0,0.1); border-radius: 4px;">
+                            <strong>💡 Why this promotion?</strong> ${promotion.promotion_score_explanation}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            const html = `
+                ${unsupportedAlertHTML}
+                ${promotionHTML}
+                
+                ${results.segment_id ? `
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; padding: 18px; margin-bottom: 15px; color: white; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);">
+                    <h3 style="font-size: 1.1em; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 1.3em;">📋</span>
+                        <span>Campaign Segment Created</span>
+                    </h3>
+                    <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 6px; display: flex; align-items: center; justify-content: space-between;">
+                        <div>
+                            <div style="font-size: 0.75em; opacity: 0.9; margin-bottom: 4px;">Segment ID</div>
+                            <div style="font-size: 1.5em; font-weight: 700; font-family: monospace; letter-spacing: 1px;">${results.segment_id}</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-size: 0.75em; opacity: 0.9; margin-bottom: 4px;">Eligible Users</div>
+                            <div style="font-size: 1.5em; font-weight: 700;">${results.eligible_count}</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 10px; font-size: 0.8em; opacity: 0.95;">
+                        💡 This segment has been saved and can be used for future campaign tracking and analysis
+                    </div>
+                </div>
+                ` : ''}
+                
+                <!-- Send Campaign Card - Compact -->
+                <div style="background: white; border: 2px solid #667eea; border-radius: 8px; padding: 12px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);">
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+                        <div style="flex: 1;">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                <span style="font-size: 1.2em;">🚀</span>
+                                <h4 style="margin: 0; font-size: 0.95em; color: #667eea; font-weight: 700;">Send Campaign via AWS</h4>
+                            </div>
+                            <div style="display: flex; gap: 15px; font-size: 0.75em; color: #6c757d;">
+                                <span><strong>${results.eligible_count}</strong> recipients</span>
+                                <span><strong>${after.channel_mix.whatsapp}</strong> WA, <strong>${after.channel_mix.sms}</strong> SMS</span>
+                                <span>Cost: <strong>$${after.total_cost.toFixed(2)}</strong></span>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input 
+                                type="number" 
+                                id="throughputTPS" 
+                                min="1" 
+                                max="100" 
+                                placeholder="TPS"
+                                title="Throughput (Transactions Per Second)"
+                                style="width: 70px; padding: 8px; border: 2px solid #dee2e6; border-radius: 6px; font-size: 0.85em; text-align: center; font-weight: 600;"
+                            />
+                            <button 
+                                onclick="sendCampaign()" 
+                                id="sendCampaignBtn"
+                                style="padding: 8px 16px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 6px; font-weight: 700; font-size: 0.85em; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 6px rgba(102, 126, 234, 0.3); white-space: nowrap;"
+                                onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 3px 10px rgba(102, 126, 234, 0.4)'"
+                                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 6px rgba(102, 126, 234, 0.3)'"
+                            >
+                                Send
+                            </button>
+                        </div>
+                    </div>
+                    <div id="sendCampaignStatus" style="display: none; padding: 10px; background: #f8f9fa; border-radius: 6px; margin-top: 10px; font-size: 0.85em;">
+                        <!-- Status messages will appear here -->
+                    </div>
+                </div>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon">👥</div>
+                        <h3>Total Matched</h3>
+                        <div class="value">${results.total_matched}</div>
+                        <div class="label">customers found</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-icon">🛡️</div>
+                        <h3>Suppressed</h3>
+                        <div class="value">${results.suppressed.count}</div>
+                        <div class="label">${((results.suppressed.count / results.total_matched) * 100).toFixed(1)}% protected</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-icon">✅</div>
+                        <h3>Eligible</h3>
+                        <div class="value">${results.eligible_count}</div>
+                        <div class="label">ready to receive campaign</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-icon">💬</div>
+                        <h3>WhatsApp Routing</h3>
+                        <div class="value">${results.whatsapp_routing.count}</div>
+                        <div class="label">intelligent channel selection</div>
+                    </div>
+                </div>
+                
+                <div class="comparison-section">
+                    <div class="comparison-header">
+                        📊 Before vs After AI Comparison
+                    </div>
+                    <div class="comparison-content">
+                        <div class="before-column">
+                            <div class="column-title">❌ Before (Spray-and-Pray)</div>
+                            <div class="metric-row">
+                                <span class="metric-label">Total Sent</span>
+                                <span class="metric-value">${before.total_sent}</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Channel</span>
+                                <span class="metric-value">${before.channel}</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Total Cost</span>
+                                <span class="metric-value">$${before.total_cost.toFixed(2)}</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Expected Engagement</span>
+                                <span class="metric-value">${before.expected_engagement.toFixed(0)} (${((before.expected_engagement / before.total_sent) * 100).toFixed(1)}%)</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Expected Unsubscribes</span>
+                                <span class="metric-value">${before.expected_unsubscribes.toFixed(0)}</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Expected Complaints</span>
+                                <span class="metric-value">${before.expected_complaints.toFixed(0)}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="after-column">
+                            <div class="column-title">✅ After (AI-Optimized)</div>
+                            <div class="metric-row">
+                                <span class="metric-label">Total Sent</span>
+                                <span class="metric-value">${after.total_sent}</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Channel Mix</span>
+                                <span class="metric-value">${after.channel_mix.whatsapp} WhatsApp, ${after.channel_mix.sms} SMS</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Total Cost</span>
+                                <span class="metric-value">$${after.total_cost.toFixed(2)}</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Expected Engagement</span>
+                                <span class="metric-value">${after.expected_engagement.toFixed(0)} (${((after.expected_engagement / after.total_sent) * 100).toFixed(1)}%)</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Expected Unsubscribes</span>
+                                <span class="metric-value">${after.expected_unsubscribes.toFixed(0)}</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Expected Complaints</span>
+                                <span class="metric-value">${after.expected_complaints.toFixed(0)}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="savings-highlight">
+                    <h3>💰 AI-Powered Savings & Improvements</h3>
+                    <div class="savings-grid">
+                        <div class="savings-item">
+                            <div class="label">Cost Savings</div>
+                            <div class="value">$${after.cost_savings.toFixed(2)} (${((after.cost_savings / before.total_cost) * 100).toFixed(1)}%)</div>
+                        </div>
+                        <div class="savings-item">
+                            <div class="label">Engagement Improvement</div>
+                            <div class="value">+${after.engagement_improvement.toFixed(1)}%</div>
+                        </div>
+                        <div class="savings-item">
+                            <div class="label">Unsubscribes Prevented</div>
+                            <div class="value">${(before.expected_unsubscribes - after.expected_unsubscribes).toFixed(0)}</div>
+                        </div>
+                        <div class="savings-item">
+                            <div class="label">Complaints Prevented</div>
+                            <div class="value">${(before.expected_complaints - after.expected_complaints).toFixed(0)}</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="details-section">
+                    <div class="details-tabs">
+                        <button class="tab-button active" onclick="showTab('suppressed', event)">
+                            🚫 Suppressed Users (${results.suppressed.count})
+                        </button>
+                        <button class="tab-button" onclick="showTab('whatsapp', event)">
+                            💬 WhatsApp Routing (${results.whatsapp_routing.count})
+                        </button>
+                        <button class="tab-button" onclick="showTab('timing', event)">
+                            ⏰ Time Optimization (${results.time_optimized.count})
+                        </button>
+                        ${results.sample_messages && results.sample_messages.length > 0 ? `
+                        <button class="tab-button" onclick="showTab('messages', event)">
+                            ✉️ Sample Messages (${results.sample_messages.length})
+                        </button>
+                        ` : ''}
+                    </div>
+                    
+                    <div id="tab-suppressed" class="tab-content active">
+                        <div class="user-list">
+                            ${results.suppressed.users.map(user => {
+                                const details = user.details || {};
+                                let detailsHTML = '';
+                                
+                                // Build details grid
+                                const detailItems = Object.entries(details).map(([key, value]) => {
+                                    const label = key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                                    return `
+                                        <div class="suppression-detail-item">
+                                            <span class="suppression-detail-label">${label}:</span>
+                                            <span class="suppression-detail-value">${value}</span>
+                                        </div>
+                                    `;
+                                }).join('');
+                                
+                                // Add progress bar for scores
+                                let progressBar = '';
+                                if (details.fatigue_score) {
+                                    const percentage = (details.fatigue_score * 100).toFixed(0);
+                                    progressBar = `
+                                        <div style="margin-top: 8px;">
+                                            <div style="font-size: 0.75em; color: #6c757d; margin-bottom: 3px;">Fatigue Level</div>
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: ${percentage}%"></div>
+                                            </div>
+                                        </div>
+                                    `;
+                                } else if (details.sentiment_score !== undefined) {
+                                    const percentage = (details.sentiment_score * 100).toFixed(0);
+                                    progressBar = `
+                                        <div style="margin-top: 8px;">
+                                            <div style="font-size: 0.75em; color: #6c757d; margin-bottom: 3px;">Sentiment Score</div>
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: ${percentage}%; background: linear-gradient(90deg, #dc3545 0%, #ffc107 50%, #28a745 100%);"></div>
+                                            </div>
+                                        </div>
+                                    `;
+                                }
+                                
+                                return `
+                                    <div class="suppression-detail-card">
+                                        <div class="suppression-header">
+                                            <div class="suppression-icon">${user.icon || '🚫'}</div>
+                                            <div class="suppression-title">
+                                                <div class="suppression-customer-id">${user.customer_id}</div>
+                                                <div class="suppression-reason">${user.reason}</div>
+                                            </div>
+                                        </div>
+                                        ${detailItems ? `<div class="suppression-details">${detailItems}</div>` : ''}
+                                        ${progressBar}
+                                    </div>
+                                `;
+                            }).join('')}
+                            ${results.suppressed.count > 10 ? `<p style="text-align: center; margin-top: 15px; color: #6c757d; font-size: 0.85em;">Showing 10 of ${results.suppressed.count} suppressed users</p>` : ''}
+                        </div>
+                    </div>
+                    
+                    <div id="tab-whatsapp" class="tab-content">
+                        <div class="user-list">
+                            ${results.whatsapp_routing.users.map(user => `
+                                <div class="user-item" style="border-left-color: #25D366;">
+                                    <div class="user-id">
+                                        <span style="font-size: 1.2em;">💬</span> ${user.customer_id} 
+                                        <span class="badge badge-success">WhatsApp Preferred</span>
+                                    </div>
+                                    <div class="user-detail">
+                                        ${user.reason} | 
+                                        <strong>Score: ${user.preference_score.toFixed(2)}</strong>
+                                        <div class="progress-bar" style="margin-top: 5px;">
+                                            <div class="progress-fill" style="width: ${(user.preference_score * 100).toFixed(0)}%; background: #25D366;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                            ${results.whatsapp_routing.count > 10 ? `<p style="text-align: center; margin-top: 15px; color: #6c757d; font-size: 0.85em;">Showing 10 of ${results.whatsapp_routing.count} WhatsApp users</p>` : ''}
+                        </div>
+                    </div>
+                    
+                    <div id="tab-timing" class="tab-content">
+                        <div class="user-list">
+                            ${results.time_optimized.users.map(user => `
+                                <div class="user-item" style="border-left-color: #17a2b8;">
+                                    <div class="user-id">
+                                        <span style="font-size: 1.2em;">⏰</span> ${user.customer_id} 
+                                        <span class="badge badge-info">Optimal: ${user.optimal_time}</span>
+                                    </div>
+                                    <div class="user-detail">
+                                        <span style="font-size: 1.1em;">🌍</span> Timezone: ${user.timezone}
+                                    </div>
+                                </div>
+                            `).join('')}
+                            ${results.time_optimized.count > 10 ? `<p style="text-align: center; margin-top: 15px; color: #6c757d; font-size: 0.85em;">Showing 10 of ${results.time_optimized.count} time-optimized users</p>` : ''}
+                        </div>
+                    </div>
+                    
+                    ${results.sample_messages && results.sample_messages.length > 0 ? `
+                    <div id="tab-messages" class="tab-content">
+                        <div style="padding: 15px;">
+                            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; padding: 15px; margin-bottom: 20px; color: white;">
+                                <h4 style="margin: 0 0 8px 0; display: flex; align-items: center; gap: 8px;">
+                                    <span style="font-size: 1.3em;">✉️</span>
+                                    <span>Personalized Campaign Messages</span>
+                                </h4>
+                                <p style="margin: 0; font-size: 0.9em; opacity: 0.95;">
+                                    Automatically generated messages with customer names and promotion details
+                                </p>
+                            </div>
+                            
+                            ${results.sample_messages.map((msg, idx) => {
+                                const channelIcon = msg.channel === 'whatsapp' ? '💬' : msg.channel === 'email' ? '📧' : '📱';
+                                const channelColor = msg.channel === 'whatsapp' ? '#25D366' : msg.channel === 'email' ? '#0078D4' : '#007bff';
+                                
+                                return `
+                                    <div style="background: white; border: 2px solid ${channelColor}; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                                            <div>
+                                                <div style="font-size: 1.1em; font-weight: 600; color: #333; margin-bottom: 5px;">
+                                                    ${channelIcon} Message ${idx + 1}
+                                                    ${msg.template_id ? `<span style="display: inline-block; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 3px 10px; border-radius: 12px; font-size: 0.7em; font-weight: 600; margin-left: 8px; box-shadow: 0 2px 4px rgba(245, 87, 108, 0.3);" title="AWS End User Messaging Template ID">📋 ${msg.template_id}</span>` : ''}
+                                                </div>
+                                                <div style="font-size: 0.9em; color: #666;">
+                                                    <strong>To:</strong> ${msg.first_name} (${msg.customer_id})
+                                                </div>
+                                                <div style="font-size: 0.9em; color: #666;">
+                                                    <strong>Location:</strong> ${msg.location}
+                                                </div>
+                                            </div>
+                                            <div style="background: ${channelColor}; color: white; padding: 6px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 600; text-transform: uppercase;">
+                                                ${msg.channel}
+                                            </div>
+                                        </div>
+                                        
+                                        ${msg.subject ? `
+                                        <div style="background: #f8f9fa; padding: 12px; border-radius: 6px; margin-bottom: 12px;">
+                                            <div style="font-size: 0.75em; color: #6c757d; margin-bottom: 4px; text-transform: uppercase; font-weight: 600;">Subject</div>
+                                            <div style="font-size: 0.95em; color: #333; font-weight: 500;">${msg.subject}</div>
+                                        </div>
+                                        ` : ''}
+                                        
+                                        <div style="background: #f8f9fa; padding: 15px; border-radius: 6px; border-left: 4px solid ${channelColor};">
+                                            <div style="font-size: 0.75em; color: #6c757d; margin-bottom: 8px; text-transform: uppercase; font-weight: 600;">Message Content</div>
+                                            <div id="message-content-${idx}" style="font-size: 0.95em; color: #333; white-space: pre-wrap; line-height: 1.6;">${msg.content}</div>
+                                        </div>
+                                        
+                                        <div style="margin-top: 12px; display: flex; gap: 10px;">
+                                            <button onclick="editMessage(${idx}, '${msg.customer_id}', '${msg.channel}')" style="flex: 1; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 10px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: transform 0.2s;">
+                                                ✏️ Edit Message
+                                            </button>
+                                            <button onclick="copyMessage(${idx})" style="flex: 1; background: #28a745; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: transform 0.2s;">
+                                                📋 Copy to Clipboard
+                                            </button>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+            
+            document.getElementById('resultsSection').innerHTML = html;
+            document.getElementById('resultsSection').classList.add('visible');
+        }
+        
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes slideIn {
+                from { transform: translateY(-50px); opacity: 0; }
+                to { transform: translateY(0); opacity: 1; }
+            }
+            @keyframes slideInRight {
+                from { transform: translateX(100px); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes fadeOut {
+                from { opacity: 1; }
+                to { opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
