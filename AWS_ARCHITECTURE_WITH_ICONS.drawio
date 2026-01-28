@@ -1,0 +1,287 @@
+<mxfile host="drawio.corp.amazon.com" modified="2026-01-24T16:23:37.600Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" version="21.7.4" etag="iCu9rIGQeNOI-HJxI7CG" type="device">
+  <diagram name="AWS AI-CPaaS Architecture" id="aws-ai-cpaas-icons">
+    <mxGraphModel dx="1188" dy="679" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="2200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="layer1-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=2;arcSize=3;" parent="1" vertex="1">
+          <mxGeometry x="50" y="50" width="1360" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="layer1-title" value="LAYER 1: USER INTERFACE &amp; CODE MANAGEMENT" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#424242;" parent="1" vertex="1">
+          <mxGeometry x="70" y="60" width="500" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gitlab-box" value="GitLab&#xa;gitlab.aws.dev&#xa;Internal Repository" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9800;strokeColor=#E65100;fontColor=#FFFFFF;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="120" y="112" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="codecommit-icon" value="AWS CodeCommit&lt;br&gt;&lt;br&gt;&lt;br&gt;" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#C925D1;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=1;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.codecommit;" parent="1" vertex="1">
+          <mxGeometry x="480" y="120" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="codecommit-label" value="Mirror Repository&lt;br&gt;Auto-sync" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="439" y="215" width="160" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="amplify-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.amplify;" parent="1" vertex="1">
+          <mxGeometry x="840" y="120" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="amplify-label" value="AWS Amplify&#xa;Web Hosting&#xa;CI/CD Pipeline" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="799" y="190" width="160" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="gitlab-codecommit-arrow" value="Mirror Push" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#FF9800;fontSize=11;fontColor=#FF9800;fontStyle=1;" parent="1" source="gitlab-box" target="codecommit-icon" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="codecommit-amplify-arrow" value="Auto Deploy" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#2196F3;fontSize=11;fontColor=#2196F3;fontStyle=1;" parent="1" source="codecommit-icon" target="amplify-icon" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="layer2-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;strokeWidth=3;arcSize=3;" parent="1" vertex="1">
+          <mxGeometry x="50" y="300" width="1360" height="450" as="geometry" />
+        </mxCell>
+        <mxCell id="layer2-title" value="LAYER 2: THE BRAIN 🧠 - AI INTELLIGENCE LAYER" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#0D47A1;" parent="1" vertex="1">
+          <mxGeometry x="70" y="310" width="500" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="agent1" value="🤖 Campaign&#xa;Orchestration Agent&#xa;&#xa;Coordinates workflow" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9C27B0;strokeColor=#4A148C;fontColor=#FFFFFF;fontSize=11;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="120" y="360" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="agent2" value="🛡️ Customer&#xa;Protection Agent&#xa;&#xa;Sentiment + Fatigue" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9C27B0;strokeColor=#4A148C;fontColor=#FFFFFF;fontSize=11;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="120" y="500" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="agent3" value="💰 Cost&#xa;Optimization Agent&#xa;&#xa;Channel selection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9C27B0;strokeColor=#4A148C;fontColor=#FFFFFF;fontSize=11;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="120" y="630" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="bedrock-label" value="Amazon Bedrock&#xa;Claude 3 Sonnet&#xa;AI Message Generation" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="439" y="453" width="160" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="comprehend-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#01A88D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.comprehend;" parent="1" vertex="1">
+          <mxGeometry x="480" y="520" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="comprehend-label" value="Amazon Comprehend&#xa;Sentiment Analysis&#xa;Emotion Detection" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="439" y="603" width="160" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="sagemaker-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#01A88D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.sagemaker;" parent="1" vertex="1">
+          <mxGeometry x="480" y="670" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="sagemaker-label" value="ML Prediction Engine&#xa;Channel Optimization&#xa;Fatigue Detection" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="439" y="753" width="160" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="s3-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#7AA116;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.s3;" parent="1" vertex="1">
+          <mxGeometry x="840" y="370" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="s3-label" value="🏔️ Amazon Iceberg&#xa;Customer Data Lake&#xa;1000+ profiles&#xa;12-18 months history" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="799" y="453" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="dynamodb-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#C925D1;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.dynamodb;" parent="1" vertex="1">
+          <mxGeometry x="840" y="540" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="dynamodb-label" value="DynamoDB&#xa;Segments + Rate Limits&#xa;rate-limits table&#xa;delivery-tracking table" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="799" y="623" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="opensearch-label" value="📚 RAG Knowledge Base&#xa;Promotions + SKUs&#xa;Vector embeddings&#xa;Semantic search" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="799" y="793" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="agents-engines-conn" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#1976D2;dashed=1;" parent="1" source="agent1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="480" y="409" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="engines-data-conn" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#1976D2;dashed=1;" parent="1" target="s3-icon" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="558" y="409" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="moat-box" value="🔒 TECHNICAL MOOT&lt;br&gt;━━━━━━━━━━━━━━━━━━&lt;br&gt;• 12-18 months AI learning&lt;br&gt;• AWS-native integration&lt;br&gt;• $2M+ switching cost&lt;br&gt;• 40% better delivery rates" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F57C00;fontSize=10;align=left;verticalAlign=top;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1200" y="370" width="180" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="performance-box" value="📊 PERFORMANCE&#xa;━━━━━━━━━━━━━━&#xa;• 98% delivery rate&#xa;• 67% open rate&#xa;• 23% click rate&#xa;• &lt;5s latency" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F57C00;fontSize=10;align=left;verticalAlign=top;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1200" y="540" width="180" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="layer3-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F57C00;strokeWidth=2;arcSize=3;" parent="1" vertex="1">
+          <mxGeometry x="50" y="800" width="1360" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="layer3-title" value="LAYER 3: INTEGRATION &amp; ORCHESTRATION LAYER" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#E65100;" parent="1" vertex="1">
+          <mxGeometry x="70" y="810" width="500" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="eventbridge-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.eventbridge;" parent="1" vertex="1">
+          <mxGeometry x="250" y="870" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="eventbridge-label" value="Amazon EventBridge&#xa;Event Routing&#xa;Real-time events&#xa;Delivery tracking" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="209" y="948" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="lambda-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.lambda_function;" parent="1" vertex="1">
+          <mxGeometry x="640" y="870" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="lambda-label" value="AWS Lambda&#xa;Delivery Processor&#xa;Event handler&#xa;ai-cpaas-demo-delivery-processor-dev" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="610" y="940" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cloudwatch-icon" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.cloudwatch;" parent="1" vertex="1">
+          <mxGeometry x="1100" y="870" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="cloudwatch-label" value="Amazon CloudWatch&#xa;Monitoring + Alarms&#xa;Cost tracking&#xa;Performance metrics" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="1040" y="940" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="brain-integration-arrow" value="AI Decisions" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#1976D2;fontSize=12;fontColor=#1976D2;fontStyle=1;" parent="1" source="layer2-bg" target="eventbridge-icon" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eventbridge-lambda-arrow" value="Trigger" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#FF9800;fontSize=11;fontColor=#FF9800;fontStyle=1;" parent="1" source="eventbridge-icon" target="lambda-icon" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lambda-cloudwatch-arrow" value="Metrics" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#FF9800;fontSize=11;fontColor=#FF9800;fontStyle=1;" parent="1" source="lambda-icon" target="cloudwatch-icon" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="layer4-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#D32F2F;strokeWidth=3;arcSize=3;" parent="1" vertex="1">
+          <mxGeometry x="50" y="1050" width="1500" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="layer4-title" value="LAYER 4: THE HEART ❤️ - AWS CDS SERVICES" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#B71C1C;" parent="1" vertex="1">
+          <mxGeometry x="70" y="1060" width="500" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="pinpoint1-label" value="AWS End User Messaging&lt;br&gt;SMS + WhatsApp&lt;br&gt;━━━━━━━━━━━━━━━━━━&lt;br&gt;Delivery tracking" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="170" y="1213" width="220" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ses-label" value="Amazon SES&lt;br&gt;Email Delivery&lt;br&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="579" y="1239.5" width="220" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="lambda-messaging-arrow" value="Send Messages" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#D32F2F;fontSize=11;fontColor=#D32F2F;fontStyle=1;" parent="1" source="lambda-icon" edge="1">
+          <mxGeometry x="-0.1892" y="31" relative="1" as="geometry">
+            <mxPoint x="219.0588235294117" y="1130" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lambda-ses-arrow" value="Send Email" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#D32F2F;fontSize=11;fontColor=#D32F2F;fontStyle=1;" parent="1" source="lambda-icon" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="679" y="1130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="layer5-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;strokeWidth=2;arcSize=3;" parent="1" vertex="1">
+          <mxGeometry x="50" y="1400" width="1100" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="layer5-title" value="LAYER 5: CUSTOMER DELIVERY 📱💬📧" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#1B5E20;" parent="1" vertex="1">
+          <mxGeometry x="70" y="1410" width="500" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="mobile-box" value="📱&#xa;&#xa;Mobile Devices&#xa;━━━━━━━━━━━━━━━━━━&#xa;SMS Messages&#xa;&#xa;• Instant delivery&#xa;• 98% open rate&#xa;• Time-sensitive alerts&#xa;• Global reach" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="180" y="1470" width="220" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="whatsapp-box" value="💬&#xa;&#xa;WhatsApp&#xa;━━━━━━━━━━━━━━━━━━&#xa;Rich Messaging&#xa;&#xa;• Template messages&#xa;• Media support&#xa;• 2-way conversations&#xa;• High engagement" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="490" y="1470" width="220" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="email-box" value="📧&#xa;&#xa;Email Clients&#xa;━━━━━━━━━━━━━━━━━━&#xa;Rich Content&#xa;&#xa;• HTML formatting&#xa;• Images &amp; links&#xa;• Detailed content&#xa;• Professional" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="800" y="1470" width="220" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="messaging-mobile-arrow" value="SMS Delivery" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#4CAF50;fontSize=11;fontColor=#4CAF50;fontStyle=1;" parent="1" target="mobile-box" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="219.0588235294117" y="1207.9999999999998" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="messaging-whatsapp-arrow" value="WhatsApp Delivery" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#4CAF50;fontSize=11;fontColor=#4CAF50;fontStyle=1;" parent="1" target="whatsapp-box" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="258" y="1169" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ses-email-arrow" value="Email Delivery" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#4CAF50;fontSize=11;fontColor=#4CAF50;fontStyle=1;" parent="1" target="email-box" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="718" y="1169" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="feedback-container" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=3;arcSize=3;" parent="1" vertex="1">
+          <mxGeometry x="1250" y="1050" width="300" height="600" as="geometry" />
+        </mxCell>
+        <mxCell id="feedback-title" value="🔄 FEEDBACK LOOP&lt;br&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#4A148C;" parent="1" vertex="1">
+          <mxGeometry x="1270" y="1060" width="260" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="engagement-events-box" value="📊 ENGAGEMENT EVENTS&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;&#xa;✓ Delivered&#xa;👁️ Opened&#xa;🖱️ Clicked&#xa;💬 Replied&#xa;⚠️ Bounced&#xa;❌ Unsubscribed&#xa;✗ Failed&#xa;&#xa;Real-time tracking&#xa;Channel-specific metrics&#xa;Customer behavior data" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE93D8;strokeColor=#6A1B9A;fontColor=#000000;fontSize=10;fontStyle=1;align=left;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="1270" y="1120" width="260" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="learning-pipeline-box" value="🧠 AI LEARNING PIPELINE&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;&#xa;1️⃣ Event Collection&#xa;   EventBridge captures all events&#xa;&#xa;2️⃣ Data Processing&#xa;   Lambda enriches with context&#xa;&#xa;3️⃣ Storage&#xa;   Iceberg stores 12-18 months&#xa;&#xa;4️⃣ Pattern Analysis&#xa;   Bedrock learns preferences&#xa;&#xa;5️⃣ Model Improvement&#xa;   Continuous optimization&#xa;&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Result: 40% better delivery&#xa;12-18 month competitive moat" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BA68C8;strokeColor=#6A1B9A;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=left;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="1270" y="1370" width="260" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="customers-events-arrow" value="User Actions" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#9C27B0;fontSize=11;fontColor=#9C27B0;fontStyle=1;dashed=1;" parent="1" source="mobile-box" target="engagement-events-box" edge="1">
+          <mxGeometry x="0.1814" y="15" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1200" y="1545" />
+              <mxPoint x="1200" y="1230" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="whatsapp-events-arrow" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#9C27B0;dashed=1;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1200" y="1545.06" />
+              <mxPoint x="1200" y="1230.06" />
+            </Array>
+            <mxPoint x="710" y="1545.06" as="sourcePoint" />
+            <mxPoint x="1269.9999999999995" y="1230.0011764705882" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="email-events-arrow" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#9C27B0;dashed=1;" parent="1" source="email-box" target="engagement-events-box" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1200" y="1545" />
+              <mxPoint x="1200" y="1230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="events-eventbridge-arrow" value="Channel Events" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#9C27B0;fontSize=11;fontColor=#9C27B0;fontStyle=1;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1220" y="1222.06" />
+              <mxPoint x="1220" y="901.06" />
+            </Array>
+            <mxPoint x="1269.9999999999995" y="1222.0011764705882" as="sourcePoint" />
+            <mxPoint x="326.6691250000001" y="901.06" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eventbridge-learning-arrow" value="Process Events" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#9C27B0;fontSize=11;fontColor=#9C27B0;fontStyle=1;" parent="1" source="lambda-icon" target="learning-pipeline-box" edge="1">
+          <mxGeometry x="-0.0008" y="20" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="679" y="840" />
+              <mxPoint x="1220" y="840" />
+              <mxPoint x="1220" y="1500" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="learning-brain-arrow" value="Continuous Learning" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;strokeColor=#9C27B0;fontSize=12;fontColor=#9C27B0;fontStyle=1;dashed=1;" parent="1" source="learning-pipeline-box" target="s3-icon" edge="1">
+          <mxGeometry x="0.0108" y="-120" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1180" y="1500" />
+              <mxPoint x="1180" y="409" />
+            </Array>
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iceberg-comprehend-arrow" value="AI Model Updates" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#9C27B0;fontSize=10;fontColor=#9C27B0;fontStyle=1;dashed=1;" parent="1" source="s3-icon" target="comprehend-icon" edge="1">
+          <mxGeometry x="-0.0725" y="-39" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iceberg-bedrock-arrow" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#9C27B0;dashed=1;" parent="1" source="s3-icon" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="558" y="409" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="700" y="409" />
+              <mxPoint x="558" y="410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cost-note" value="💰 COST OPTIMIZATION&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;&#xa;AI learns from feedback:&#xa;• Best channel per customer&#xa;• Optimal send times&#xa;• Message preferences&#xa;• Fatigue patterns&#xa;&#xa;Result:&#xa;• 35% cost reduction&#xa;• Higher engagement&#xa;• Better ROI&#xa;• Reduced waste" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F57C00;fontSize=9;align=left;verticalAlign=top;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="70" y="1700" width="250" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="moat-note" value="🔒 COMPETITIVE ADVANTAGE&lt;br&gt;━━━━━━━━━━━━━━━━━━━━━━━━━━&lt;br&gt;&lt;br&gt;12-18 months of learning:&lt;br&gt;• Customer preferences&lt;br&gt;• Behavioral patterns&lt;br&gt;• Channel effectiveness&lt;br&gt;• Timing optimization&lt;br&gt;&lt;br&gt;Cannot be replicated:&lt;br&gt;• Unique to your data&lt;br&gt;• Continuous improvement&lt;br&gt;• $2M+ switching cost&lt;br&gt;• Proprietary insights" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F57C00;fontSize=9;align=left;verticalAlign=top;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="370" y="1700" width="250" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="metrics-note" value="📊 PERFORMANCE METRICS&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;&#xa;With AI Learning:&#xa;• 98% delivery rate (+15%)&#xa;• 67% open rate (+22%)&#xa;• 23% click rate (+8%)&#xa;• &lt;5s latency&#xa;&#xa;Without AI Learning:&#xa;• 83% delivery rate&#xa;• 45% open rate&#xa;• 15% click rate&#xa;• Random channel selection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F57C00;fontSize=9;align=left;verticalAlign=top;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="670" y="1700" width="250" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="OzNjKLc5EI6_aSVxQzmy-1" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=data:image/svg+xml,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgaGVpZ2h0PSIyNCIgd2lkdGg9IjI0Ij4mI3hhOzxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMF8xNV8xMTMpIj4mI3hhOzxyZWN0IGZpbGw9IiNERDM0NEMiIGhlaWdodD0iMjQiIHdpZHRoPSIyNCIvPiYjeGE7PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xOC42MSA2SDcuMzlDNi42MyA2IDYgNi42MiA2IDcuMzlWMTUuNTJDNiAxNi4zNCA2LjY3IDE3IDcuNDggMTdIMTJWMTkuMDFDMTIgMTkuMiAxMi4xMSAxOS4zOCAxMi4yOCAxOS40NkMxMi4zNSAxOS40OSAxMi40MiAxOS41MSAxMi41IDE5LjUxQzEyLjYxIDE5LjUxIDEyLjcyIDE5LjQ3IDEyLjgxIDE5LjRMMTUuODMgMTdIMTguNjFDMTkuMzcgMTcgMjAgMTYuMzggMjAgMTUuNjFWNy4zOUMyMCA2LjYzIDE5LjM4IDYgMTguNjEgNlpNMTkgMTUuNjFDMTkgMTUuODIgMTguODMgMTYgMTguNjEgMTZIMTUuNjZDMTUuNTUgMTYgMTUuNDQgMTYuMDQgMTUuMzUgMTYuMTFMMTMgMTcuOThWMTYuNTFDMTMgMTYuMjMgMTIuNzggMTYuMDEgMTIuNSAxNi4wMUg3LjQ4QzcuMjEgMTYuMDEgNyAxNS43OSA3IDE1LjUzVjcuMzlDNyA3LjE4IDcuMTcgNyA3LjM5IDdIMTguNjJDMTguODMgNyAxOS4wMSA3LjE3IDE5LjAxIDcuMzlWMTUuNjJMMTkgMTUuNjFaTTE2LjE0IDVINS4zOUM1LjE4IDUgNSA1LjE3IDUgNS4zOVYxNkg0LjVDNC4yMiAxNiA0IDE1Ljc4IDQgMTUuNVY1LjM5QzQgNC42MiA0LjYyIDQgNS4zOSA0SDE2LjE1QzE2Ljk0IDQgMTcuNTggNC42NCAxNy41OCA1LjQzSDE2LjU4QzE2LjU4IDUuMTkgMTYuMzkgNSAxNi4xNSA1SDE2LjE0Wk0xNS4wOCAxMS41QzE0Ljk1IDExLjQxIDE0LjgxIDExLjM0IDE0LjY2IDExLjI4QzE1LjE1IDEwLjkgMTUuNDcgMTAuMyAxNS40NyA5LjYzQzE1LjQ3IDguNDcgMTQuNTMgNy41MyAxMy4zNyA3LjUzQzEyLjIxIDcuNTMgMTEuMjcgOC40NyAxMS4yNyA5LjYzQzExLjI3IDEwLjMgMTEuNTkgMTAuODkgMTIuMDggMTEuMjhDMTAuOSAxMS44MSAxMC4wNyAxMy4wNiAxMC4wNyAxNC41MUMxMC4wNyAxNC43OSAxMC4yOSAxNS4wMSAxMC41NyAxNS4wMUgxNi4xN0MxNi40NSAxNS4wMSAxNi42NyAxNC43OSAxNi42NyAxNC41MUMxNi42NyAxMy4yNyAxNi4wNyAxMi4xNSAxNS4wOCAxMS41MVYxMS41Wk0xMy4zOCA4LjUzQzEzLjk5IDguNTMgMTQuNDggOS4wMiAxNC40OCA5LjYzQzE0LjQ4IDEwLjI0IDEzLjk5IDEwLjczIDEzLjM4IDEwLjczQzEyLjc3IDEwLjczIDEyLjI4IDEwLjI0IDEyLjI4IDkuNjNDMTIuMjggOS4wMiAxMi43NyA4LjUzIDEzLjM4IDguNTNaTTExLjEzIDE0QzExLjM0IDEyLjg2IDEyLjI3IDEyIDEzLjM4IDEyQzEzLjc5IDEyIDE0LjE5IDEyLjEyIDE0LjU0IDEyLjM0QzE1LjExIDEyLjcgMTUuNSAxMy4zMSAxNS42MyAxNEgxMS4xM1oiLz4mI3hhOzwvZz4mI3hhOzxkZWZzPiYjeGE7PGNsaXBQYXRoIGlkPSJjbGlwMF8xNV8xMTMiPiYjeGE7PHJlY3QgZmlsbD0id2hpdGUiIGhlaWdodD0iMjQiIHdpZHRoPSIyNCIvPiYjeGE7PC9jbGlwUGF0aD4mI3hhOzwvZGVmcz4mI3hhOzwvc3ZnPg==;" vertex="1" parent="1">
+          <mxGeometry x="185" y="1140" width="70" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="OzNjKLc5EI6_aSVxQzmy-2" value="" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.ses;fillColor=#D9A741;gradientColor=none;" vertex="1" parent="1">
+          <mxGeometry x="631" y="1129" width="79.5" height="93" as="geometry" />
+        </mxCell>
+        <mxCell id="OzNjKLc5EI6_aSVxQzmy-3" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=data:image/svg+xml,PHN2ZyB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA2NCA2NCIgaGVpZ2h0PSI2NHB4IiB3aWR0aD0iNjRweCI+JiN4YTsgICAgPHRpdGxlPkljb24tQXJjaGl0ZWN0dXJlLzQ4L0FyY2hfQW1hem9uLUJlZHJvY2tfNDg8L3RpdGxlPiYjeGE7ICAgIDxnIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2U9Im5vbmUiIGlkPSJJY29uLUFyY2hpdGVjdHVyZS80OC9BcmNoX0FtYXpvbi1CZWRyb2NrXzQ4Ij4mI3hhOyAgICAgICAgPGcgZmlsbD0iIzAxQTg4RCIgaWQ9Ikljb24tQXJjaGl0ZWN0dXJlLUJHLzQ4L01hY2hpbmUtTGVhcm5pbmciPiYjeGE7ICAgICAgICAgICAgPHJlY3QgaGVpZ2h0PSI2NCIgd2lkdGg9IjY0IiB5PSIwIiB4PSIwIiBpZD0iUmVjdGFuZ2xlIi8+JiN4YTsgICAgICAgIDwvZz4mI3hhOyAgICAgICAgPGcgZmlsbD0iI0ZGRkZGRiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTAuMDAwMDAwLCAxMC4wMDAwMDApIiBpZD0iSWNvbi1TZXJ2aWNlLzQ4L0FtYXpvbi1CZWRyb2NrXzQ4Ij4mI3hhOyAgICAgICAgICAgIDxwYXRoIGlkPSJGaWxsLTMiIGQ9Ik00MSwyMC45OTk4ODE4IEM0MC40NDgsMjAuOTk5ODgxOCA0MCwyMC41NTA4ODE4IDQwLDE5Ljk5OTg4MTggQzQwLDE5LjQ0ODg4MTggNDAuNDQ4LDE4Ljk5OTg4MTggNDEsMTguOTk5ODgxOCBDNDEuNTUyLDE4Ljk5OTg4MTggNDIsMTkuNDQ4ODgxOCA0MiwxOS45OTk4ODE4IEM0MiwyMC41NTA4ODE4IDQxLjU1MiwyMC45OTk4ODE4IDQxLDIwLjk5OTg4MTggTDQxLDIwLjk5OTg4MTggWiBNMTYuOTc3LDQxLjg0Nzg4MTggTDEzLjc3NCw0MC4xMDE4ODE4IEwxNy41MTUsMzcuODU2ODgxOCBMMTYuNDg1LDM2LjE0Mjg4MTggTDExLjczOCwzOC45OTA4ODE4IEw3LDM2LjQwNTg4MTggTDcsMzAuNTY1ODgxOCBMMTEuNTE1LDI3Ljg1Njg4MTggTDEwLjQ4NSwyNi4xNDI4ODE4IEw2LDI4LjgzMzg4MTggTDIsMjYuNDMzODgxOCBMMiwyMi42MTc4ODE4IEw3LjQ0NywxOS44OTQ4ODE4IEw2LjU1MywxOC4xMDQ4ODE4IEwyLDIwLjM4MTg4MTggTDIsMTcuNjE3ODgxOCBMNi45NTYsMTUuMTM5ODgxOCBMMTEsMTcuNTY1ODgxOCBMMTEsMjAuMzgxODgxOCBMNy41NTMsMjIuMTA0ODgxOCBMOC40NDcsMjMuODk0ODgxOCBMMTIuMDAzLDIyLjExNjg4MTggTDE1LjU1NywyMy44NzY4ODE4IEwxNi40NDMsMjIuMDg0ODgxOCBMMTMsMjAuMzc5ODgxOCBMMTMsMTcuNTY1ODgxOCBMMTcuNTE1LDE0Ljg1Njg4MTggQzE3LjgxNSwxNC42NzY4ODE4IDE4LDE0LjM1MDg4MTggMTgsMTMuOTk5ODgxOCBMMTgsOC45OTk4ODE3OCBMMTYsOC45OTk4ODE3OCBMMTYsMTMuNDMzODgxOCBMMTIsMTUuODMzODgxOCBMOCwxMy40MzM4ODE4IEw4LDYuNTg3ODgxNzggTDExLDQuOTIxODgxNzggTDExLDEwLjk5OTg4MTggTDEzLDEwLjk5OTg4MTggTDEzLDMuODEwODgxNzggTDE2LjAyNCwyLjEyOTg4MTc4IEwyMS4wMDIsNC42MTU4ODE3OCBMMjEuMDAxLDI2LjQ0OTg4MTggTDEwLjQ2MywzMy4xNTU4ODE4IEwxMS41MzcsMzQuODQzODgxOCBMMjEuMDAxLDI4LjgyMTg4MTggTDIxLDM5LjQzMzg4MTggTDE2Ljk3Nyw0MS44NDc4ODE4IFogTTM4LDI4Ljk5OTg4MTggQzM4LjU1MiwyOC45OTk4ODE4IDM5LDI5LjQ0ODg4MTggMzksMjkuOTk5ODgxOCBDMzksMzAuNTUwODgxOCAzOC41NTIsMzAuOTk5ODgxOCAzOCwzMC45OTk4ODE4IEMzNy40NDgsMzAuOTk5ODgxOCAzNywzMC41NTA4ODE4IDM3LDI5Ljk5OTg4MTggQzM3LDI5LjQ0ODg4MTggMzcuNDQ4LDI4Ljk5OTg4MTggMzgsMjguOTk5ODgxOCBMMzgsMjguOTk5ODgxOCBaIE0zMCwzOC45OTk4ODE4IEMyOS40NDgsMzguOTk5ODgxOCAyOSwzOC41NTA4ODE4IDI5LDM3Ljk5OTg4MTggQzI5LDM3LjQ0ODg4MTggMjkuNDQ4LDM2Ljk5OTg4MTggMzAsMzYuOTk5ODgxOCBDMzAuNTUyLDM2Ljk5OTg4MTggMzEsMzcuNDQ4ODgxOCAzMSwzNy45OTk4ODE4IEMzMSwzOC41NTA4ODE4IDMwLjU1MiwzOC45OTk4ODE4IDMwLDM4Ljk5OTg4MTggTDMwLDM4Ljk5OTg4MTggWiBNMzIsNS45OTk4ODE3OCBDMzIuNTUyLDUuOTk5ODgxNzggMzMsNi40NDg4ODE3OCAzMyw2Ljk5OTg4MTc4IEMzMyw3LjU1MDg4MTc4IDMyLjU1Miw3Ljk5OTg4MTc4IDMyLDcuOTk5ODgxNzggQzMxLjQ0OCw3Ljk5OTg4MTc4IDMxLDcuNTUwODgxNzggMzEsNi45OTk4ODE3OCBDMzEsNi40NDg4ODE3OCAzMS40NDgsNS45OTk4ODE3OCAzMiw1Ljk5OTg4MTc4IEwzMiw1Ljk5OTg4MTc4IFogTTQxLDE2Ljk5OTg4MTggQzM5LjY5OCwxNi45OTk4ODE4IDM4LjU5OCwxNy44Mzg4ODE4IDM4LjE4NCwxOC45OTk4ODE4IEwyMy4wMDEsMTguOTk5ODgxOCBMMjMuMDAxLDE0Ljk5OTg4MTggTDMyLDE0Ljk5OTg4MTggQzMyLjU1MywxNC45OTk4ODE4IDMzLDE0LjU1MTg4MTggMzMsMTMuOTk5ODgxOCBMMzMsOS44MTU4ODE3OCBDMzQuMTYxLDkuNDAxODgxNzggMzUsOC4zMDE4ODE3OCAzNSw2Ljk5OTg4MTc4IEMzNSw1LjM0NTg4MTc4IDMzLjY1NCwzLjk5OTg4MTc4IDMyLDMuOTk5ODgxNzggQzMwLjM0NiwzLjk5OTg4MTc4IDI5LDUuMzQ1ODgxNzggMjksNi45OTk4ODE3OCBDMjksOC4zMDE4ODE3OCAyOS44MzksOS40MDE4ODE3OCAzMSw5LjgxNTg4MTc4IEwzMSwxMi45OTk4ODE4IEwyMy4wMDEsMTIuOTk5ODgxOCBMMjMuMDAyLDMuOTk3ODgxNzggQzIzLjAwMiwzLjYxODg4MTc4IDIyLjc4OCwzLjI3Mjg4MTc4IDIyLjQ0OSwzLjEwMzg4MTc4IEwxNi40NDcsMC4xMDQ4ODE3ODEgQzE2LjE1MSwtMC4wNDIxMTgyMTk1IDE1LjgwMywtMC4wMzQxMTgyMTk1IDE1LjUxNSwwLjEyNTg4MTc4MSBMNi41MTUsNS4xMjU4ODE3OCBDNi4xOTcsNS4zMDE4ODE3OCA2LDUuNjM2ODgxNzggNiw1Ljk5OTg4MTc4IEw2LDEzLjM4MTg4MTggTDAuNTUzLDE2LjEwNDg4MTggQzAuMjE0LDE2LjI3NDg4MTggMCwxNi42MjA4ODE4IDAsMTYuOTk5ODgxOCBMMCwyNi45OTk4ODE4IEMwLDI3LjM1MDg4MTggMC4xODUsMjcuNjc2ODgxOCAwLjQ4NSwyNy44NTY4ODE4IEw1LDMwLjU2NTg4MTggTDUsMzYuOTk5ODgxOCBDNSwzNy4zNjU4ODE4IDUuMiwzNy43MDI4ODE4IDUuNTIxLDM3Ljg3Nzg4MTggTDE2LjUyMSw0My44Nzc4ODE4IEMxNi42NzEsNDMuOTU4ODgxOCAxNi44MzUsNDMuOTk5ODgxOCAxNyw0My45OTk4ODE4IEMxNy4xNzksNDMuOTk5ODgxOCAxNy4zNTYsNDMuOTUxODgxOCAxNy41MTUsNDMuODU2ODgxOCBMMjIuNTE1LDQwLjg1Njg4MTggQzIyLjgxNSw0MC42NzY4ODE4IDIzLDQwLjM1MDg4MTggMjMsMzkuOTk5ODgxOCBMMjMsMzIuOTk5ODgxOCBMMjksMzIuOTk5ODgxOCBMMjksMzUuMTgzODgxOCBDMjcuODM5LDM1LjU5Nzg4MTggMjcsMzYuNjk3ODgxOCAyNywzNy45OTk4ODE4IEMyNywzOS42NTM4ODE4IDI4LjM0Niw0MC45OTk4ODE4IDMwLDQwLjk5OTg4MTggQzMxLjY1NCw0MC45OTk4ODE4IDMzLDM5LjY1Mzg4MTggMzMsMzcuOTk5ODgxOCBDMzMsMzYuNjk3ODgxOCAzMi4xNjEsMzUuNTk3ODgxOCAzMSwzNS4xODM4ODE4IEwzMSwzMS45OTk4ODE4IEMzMSwzMS40NDc4ODE4IDMwLjU1MywzMC45OTk4ODE4IDMwLDMwLjk5OTg4MTggTDIzLDMwLjk5OTg4MTggTDIzLjAwMSwyNi45OTk4ODE4IEwzMy41ODYsMjYuOTk5ODgxOCBMMzUuMzAxLDI4LjcxNDg4MTggQzM1LjExMywyOS4xMDU4ODE4IDM1LDI5LjUzNzg4MTggMzUsMjkuOTk5ODgxOCBDMzUsMzEuNjUzODgxOCAzNi4zNDYsMzIuOTk5ODgxOCAzOCwzMi45OTk4ODE4IEMzOS42NTQsMzIuOTk5ODgxOCA0MSwzMS42NTM4ODE4IDQxLDI5Ljk5OTg4MTggQzQxLDI4LjM0NTg4MTggMzkuNjU0LDI2Ljk5OTg4MTggMzgsMjYuOTk5ODgxOCBDMzcuNTM4LDI2Ljk5OTg4MTggMzcuMTA2LDI3LjExMjg4MTggMzYuNzE1LDI3LjMwMDg4MTggTDM0LjcwNywyNS4yOTI4ODE4IEMzNC41MiwyNS4xMDQ4ODE4IDM0LjI2NiwyNC45OTk4ODE4IDM0LDI0Ljk5OTg4MTggTDIzLjAwMSwyNC45OTk4ODE4IEwyMy4wMDEsMjAuOTk5ODgxOCBMMzguMTg0LDIwLjk5OTg4MTggQzM4LjU5OCwyMi4xNjA4ODE4IDM5LjY5OCwyMi45OTk4ODE4IDQxLDIyLjk5OTg4MTggQzQyLjY1NCwyMi45OTk4ODE4IDQ0LDIxLjY1Mzg4MTggNDQsMTkuOTk5ODgxOCBDNDQsMTguMzQ1ODgxOCA0Mi42NTQsMTYuOTk5ODgxOCA0MSwxNi45OTk4ODE4IEw0MSwxNi45OTk4ODE4IFoiLz4mI3hhOyAgICAgICAgPC9nPiYjeGE7ICAgIDwvZz4mI3hhOzwvc3ZnPg==;" vertex="1" parent="1">
+          <mxGeometry x="480" y="377" width="64" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="OzNjKLc5EI6_aSVxQzmy-5" value="" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#01A88D;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.sagemaker;" vertex="1" parent="1">
+          <mxGeometry x="820" y="710" width="78" height="78" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

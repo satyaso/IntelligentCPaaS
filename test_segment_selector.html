@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Segment Selector</title>
+</head>
+<body>
+    <h1>Segment Selector Test</h1>
+    
+    <div>
+        <h2>Segment Selector</h2>
+        <select id="segmentSelector">
+            <option value="">Select a segment...</option>
+        </select>
+    </div>
+    
+    <div>
+        <h2>Actions</h2>
+        <button onclick="addTestSegment()">Add Test Segment</button>
+        <button onclick="loadSegments()">Reload Segments</button>
+        <button onclick="clearSegments()">Clear All Segments</button>
+    </div>
+    
+    <div>
+        <h2>Debug Info</h2>
+        <pre id="debug"></pre>
+    </div>
+    
+    <script>
+        const SEGMENT_STORAGE_KEY = 'campaign_segments';
+        
+        function loadSegmentHistory() {
+            const segments = JSON.parse(localStorage.getItem(SEGMENT_STORAGE_KEY) || '[]');
+            document.getElementById('debug').textContent = `Found ${segments.length} segments:\n` + JSON.stringify(segments, null, 2);
+            return segments;
+        }
+        
+        function loadSegments() {
+            const segments = loadSegmentHistory();
+            const select = document.getElementById('segmentSelector');
+            select.innerHTML = '<option value="">Select a segment...</option>';
+            
+            segments.forEach(seg => {
+                const option = document.createElement('option');
+                option.value = JSON.stringify(seg);
+                option.textContent = `${seg.segment_id} - ${seg.location} + ${seg.sku} (${seg.eligible_count} users)`;
+                select.appendChild(option);
+            });
+            
+            console.log('Loaded', segments.length, 'segments');
+        }
+        
+        function addTestSegment() {
+            const segments = loadSegmentHistory();
+            segments.push({
+                segment_id: `SEG-TEST-${Date.now()}`,
+                location: 'Bangalore',
+                sku: 'SKU-LAPTOP-001',
+                eligible_count: 42,
+                created: new Date().toISOString()
+            });
+            localStorage.setItem(SEGMENT_STORAGE_KEY, JSON.stringify(segments));
+            loadSegments();
+        }
+        
+        function clearSegments() {
+            localStorage.removeItem(SEGMENT_STORAGE_KEY);
+            loadSegments();
+        }
+        
+        // Load on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSegments();
+        });
+    </script>
+</body>
+</html>

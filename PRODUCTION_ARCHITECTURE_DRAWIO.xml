@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-01-23T00:00:00.000Z" agent="Kiro" version="22.1.0">
+  <diagram name="AWS AI-CPaaS Production Architecture" id="aws-ai-cpaas">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1800" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- LAYER 1: USER INTERFACE -->
+        <mxCell id="layer1-container" value="LAYER 1: USER INTERFACE &amp; CODE MANAGEMENT" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;verticalAlign=top;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="50" y="50" width="1100" height="150" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="gitlab" value="GitLab&#xa;gitlab.aws.dev&#xa;Internal Repository" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9800;strokeColor=#E65100;fontColor=#FFFFFF;fontSize=12" vertex="1" parent="1">
+          <mxGeometry x="100" y="100" width="200" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="codecommit" value="AWS CodeCommit&#xa;Mirror Repository&#xa;Auto-sync" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9800;strokeColor=#E65100;fontColor=#FFFFFF;fontSize=12" vertex="1" parent="1">
+          <mxGeometry x="400" y="100" width="200" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="amplify" value="AWS Amplify&#xa;Web Hosting&#xa;CI/CD Pipeline" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2196F3;strokeColor=#0D47A1;fontColor=#FFFFFF;fontSize=12" vertex="1" parent="1">
+          <mxGeometry x="700" y="100" width="200" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- Connections Layer 1 -->
+        <mxCell id="gitlab-codecommit" value="Mirror Push" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#FF9800" edge="1" parent="1" source="gitlab" target="codecommit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="codecommit-amplify" value="Auto Deploy" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#2196F3" edge="1" parent="1" source="codecommit" target="amplify">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        
+        <!-- LAYER 2: THE BRAIN - AI INTELLIGENCE -->
+        <mxCell id="layer2-container" value="LAYER 2: THE BRAIN 🧠 - AI INTELLIGENCE LAYER" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;strokeWidth=3;verticalAlign=top;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="50" y="250" width="1100" height="350" as="geometry" />
+        </mxCell>
+        
+        <!-- AI Agents (Left) -->
+        <mxCell id="agent-orchestration" value="🤖 Campaign&#xa;Orchestration Agent&#xa;Coordinates workflow" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9C27B0;strokeColor=#4A148C;fontColor=#FFFFFF;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="100" y="300" width="180" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="agent-protection" value="🛡️ Customer&#xa;Protection Agent&#xa;Sentiment + Fatigue" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9C27B0;strokeColor=#4A148C;fontColor=#FFFFFF;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="100" y="400" width="180" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="agent-cost" value="💰 Cost&#xa;Optimization Agent&#xa;Channel selection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9C27B0;strokeColor=#4A148C;fontColor=#FFFFFF;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="100" y="500" width="180" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- AI Engines (Center) -->
+        <mxCell id="bedrock" value="Amazon Bedrock&#xa;Claude 3 Sonnet&#xa;AI Message Generation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1565C0;strokeColor=#0D47A1;fontColor=#FFFFFF;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="350" y="300" width="180" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="comprehend" value="Amazon Comprehend&#xa;Sentiment Analysis&#xa;Emotion Detection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1565C0;strokeColor=#0D47A1;fontColor=#FFFFFF;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="350" y="400" width="180" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="prediction" value="ML Prediction Engine&#xa;Channel Optimization&#xa;Fatigue Detection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1565C0;strokeColor=#0D47A1;fontColor=#FFFFFF;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="350" y="500" width="180" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- Data Layer (Right) -->
+        <mxCell id="iceberg" value="🏔️ Amazon Iceberg&#xa;Customer Data Lake&#xa;1000+ profiles&#xa;12-18 months history" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#388E3C;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="600" y="300" width="180" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="dynamodb" value="DynamoDB&#xa;Segments + Rate Limits&#xa;rate-limits table&#xa;delivery-tracking table" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#388E3C;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="600" y="400" width="180" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="rag" value="📚 RAG Knowledge Base&#xa;Promotions + SKUs&#xa;Vector embeddings&#xa;Semantic search" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#388E3C;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="600" y="500" width="180" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- Brain Internal Connections -->
+        <mxCell id="agents-engines" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#1976D2;dashed=1" edge="1" parent="1" source="agent-orchestration" target="bedrock">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="engines-data" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#1976D2;dashed=1" edge="1" parent="1" source="bedrock" target="iceberg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Technical Moat Annotation -->
+        <mxCell id="moat-annotation" value="🔒 TECHNICAL MOAT&#xa;━━━━━━━━━━━━━━━━━━&#xa;• 12-18 months AI learning&#xa;• AWS-native integration&#xa;• $2M+ switching cost&#xa;• 40% better delivery rates" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F57C00;fontSize=10;align=left;verticalAlign=top" vertex="1" parent="1">
+          <mxGeometry x="850" y="300" width="250" height="120" as="geometry" />
+        </mxCell>
+        
+        
+        <!-- LAYER 3: INTEGRATION & ORCHESTRATION -->
+        <mxCell id="layer3-container" value="LAYER 3: INTEGRATION &amp; ORCHESTRATION LAYER" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F57C00;strokeWidth=2;verticalAlign=top;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="50" y="650" width="1100" height="150" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="eventbridge" value="Amazon EventBridge&#xa;Event Routing&#xa;Real-time events&#xa;Delivery tracking" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9800;strokeColor=#E65100;fontColor=#FFFFFF;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="150" y="700" width="200" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="lambda" value="AWS Lambda&#xa;Delivery Processor&#xa;Event handler&#xa;ai-cpaas-demo-delivery-processor-dev" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9800;strokeColor=#E65100;fontColor=#FFFFFF;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="450" y="700" width="250" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="cloudwatch" value="Amazon CloudWatch&#xa;Monitoring + Alarms&#xa;Cost tracking&#xa;Performance metrics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9800;strokeColor=#E65100;fontColor=#FFFFFF;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="800" y="700" width="200" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- Brain to Integration Connections -->
+        <mxCell id="brain-eventbridge" value="AI Decisions" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#1976D2" edge="1" parent="1" source="layer2-container" target="eventbridge">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="eventbridge-lambda" value="Trigger" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#FF9800" edge="1" parent="1" source="eventbridge" target="lambda">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="lambda-cloudwatch" value="Metrics" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#FF9800" edge="1" parent="1" source="lambda" target="cloudwatch">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- LAYER 4: THE HEART - AWS CDS SERVICES -->
+        <mxCell id="layer4-container" value="LAYER 4: THE HEART ❤️ - AWS CDS SERVICES" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#D32F2F;strokeWidth=3;verticalAlign=top;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="50" y="850" width="1100" height="250" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="end-user-messaging" value="AWS End User Messaging&#xa;SMS + WhatsApp&#xa;━━━━━━━━━━━━━━━━━━&#xa;📱 SMS: $0.00645/msg&#xa;💬 WhatsApp: $0.0042/msg&#xa;Template management&#xa;Delivery tracking" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D32F2F;strokeColor=#B71C1C;fontColor=#FFFFFF;fontSize=11;align=left" vertex="1" parent="1">
+          <mxGeometry x="100" y="900" width="250" height="150" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="ses" value="Amazon SES&#xa;Email Delivery&#xa;━━━━━━━━━━━━━━━━━━&#xa;📧 Email: $0.10/1000&#xa;HTML support&#xa;Bounce handling&#xa;Rich content" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D32F2F;strokeColor=#B71C1C;fontColor=#FFFFFF;fontSize=11;align=left" vertex="1" parent="1">
+          <mxGeometry x="425" y="900" width="250" height="150" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="pinpoint" value="Amazon Pinpoint&#xa;Campaign Management&#xa;━━━━━━━━━━━━━━━━━━&#xa;Multi-channel&#xa;Analytics&#xa;Journey orchestration&#xa;A/B testing" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D32F2F;strokeColor=#B71C1C;fontColor=#FFFFFF;fontSize=11;align=left" vertex="1" parent="1">
+          <mxGeometry x="750" y="900" width="250" height="150" as="geometry" />
+        </mxCell>
+        
+        <!-- Integration to Heart Connections -->
+        <mxCell id="lambda-messaging" value="Send Messages" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#D32F2F" edge="1" parent="1" source="lambda" target="end-user-messaging">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="lambda-ses" value="Send Email" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#D32F2F" edge="1" parent="1" source="lambda" target="ses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        
+        <!-- LAYER 5: CUSTOMER DELIVERY -->
+        <mxCell id="layer5-container" value="LAYER 5: CUSTOMER DELIVERY" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;strokeWidth=2;verticalAlign=top;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="50" y="1150" width="1100" height="150" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="mobile-sms" value="📱 Mobile Devices&#xa;SMS&#xa;160 char messages&#xa;Global delivery" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="150" y="1200" width="200" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="whatsapp" value="💬 WhatsApp&#xa;Rich Media&#xa;Templates + Buttons&#xa;Interactive messages" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="450" y="1200" width="200" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="email-clients" value="📧 Email Clients&#xa;HTML Content&#xa;Rich formatting&#xa;Attachments" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4CAF50;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="750" y="1200" width="200" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- Heart to Customer Connections -->
+        <mxCell id="messaging-mobile" value="Deliver" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#388E3C" edge="1" parent="1" source="end-user-messaging" target="mobile-sms">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="messaging-whatsapp" value="Deliver" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#388E3C" edge="1" parent="1" source="end-user-messaging" target="whatsapp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="ses-email" value="Deliver" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#388E3C" edge="1" parent="1" source="ses" target="email-clients">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- FEEDBACK LOOP (Right Side) -->
+        <mxCell id="feedback-container" value="FEEDBACK LOOP 🔄" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=2;verticalAlign=top;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1200" y="1150" width="250" height="400" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="engagement-events" value="📈 Engagement Events&#xa;━━━━━━━━━━━━━━━━━━&#xa;• Delivered&#xa;• Opened&#xa;• Clicked&#xa;• Replied&#xa;• Bounced&#xa;• Unsubscribed" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9C27B0;strokeColor=#4A148C;fontColor=#FFFFFF;fontSize=10;align=left" vertex="1" parent="1">
+          <mxGeometry x="1225" y="1200" width="200" height="120" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="learning-pipeline" value="🔄 AI Learning Pipeline&#xa;━━━━━━━━━━━━━━━━━━&#xa;1. EventBridge capture&#xa;2. Lambda processing&#xa;3. Iceberg storage&#xa;4. Bedrock training&#xa;5. Model improvement" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9C27B0;strokeColor=#4A148C;fontColor=#FFFFFF;fontSize=10;align=left" vertex="1" parent="1">
+          <mxGeometry x="1225" y="1350" width="200" height="150" as="geometry" />
+        </mxCell>
+        
+        <!-- Feedback Loop Connections -->
+        <mxCell id="customers-engagement" value="User Actions" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#9C27B0;dashed=1" edge="1" parent="1" source="mobile-sms" target="engagement-events">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="engagement-learning" value="Process" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#9C27B0" edge="1" parent="1" source="engagement-events" target="learning-pipeline">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="learning-brain" value="Continuous Learning" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#9C27B0;dashed=1" edge="1" parent="1" source="learning-pipeline" target="layer2-container">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1325" y="1550" />
+              <mxPoint x="1325" y="425" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        
+        <!-- Performance Metrics Annotation -->
+        <mxCell id="performance-annotation" value="📊 PERFORMANCE&#xa;━━━━━━━━━━━━━━&#xa;• 98% delivery rate&#xa;• 67% open rate&#xa;• 23% click rate&#xa;• &lt;5s latency" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F57C00;fontSize=10;align=left;verticalAlign=top" vertex="1" parent="1">
+          <mxGeometry x="850" y="450" width="250" height="120" as="geometry" />
+        </mxCell>
+        
+        <!-- Cost Optimization Annotation -->
+        <mxCell id="cost-annotation" value="💰 COST OPTIMIZATION&#xa;━━━━━━━━━━━━━━━━━━&#xa;• 35% cost reduction&#xa;• Smart channel selection&#xa;• Real-time optimization&#xa;• WhatsApp preferred" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;fontSize=10;align=left;verticalAlign=top" vertex="1" parent="1">
+          <mxGeometry x="50" y="1350" width="250" height="120" as="geometry" />
+        </mxCell>
+        
+        <!-- Data Flow Labels -->
+        <mxCell id="flow-label-1" value="Intelligent Decisions" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=1;fontColor=#1976D2" vertex="1" parent="1">
+          <mxGeometry x="450" y="620" width="150" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="flow-label-2" value="Personalized Messages" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=1;fontColor=#D32F2F" vertex="1" parent="1">
+          <mxGeometry x="450" y="1110" width="180" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="flow-label-3" value="Engagement Feedback" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=1;fontColor=#9C27B0" vertex="1" parent="1">
+          <mxGeometry x="1050" y="1240" width="150" height="30" as="geometry" />
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,19 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - echo "Installing Python dependencies..."
+        - pip install -r requirements.txt
+    build:
+      commands:
+        - echo "Seeding demo data..."
+        - python -c "from src.ai_cpaas_demo.data.data_seeder import DataSeeder; seeder = DataSeeder(); seeder.seed_all_data(); print('✅ Data seeded successfully')"
+        - echo "Build completed successfully"
+  artifacts:
+    baseDirectory: /
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - '.venv/**/*'
