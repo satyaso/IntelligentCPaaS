@@ -1,0 +1,128 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "ai-cpaas-demo"
+version = "0.1.0"
+description = "AI-powered Communications Platform as a Service demonstration"
+authors = ["AI-CPaaS Team"]
+readme = "README.md"
+packages = [{include = "ai_cpaas_demo", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pydantic = "^2.5.0"
+fastapi = "^0.104.0"
+uvicorn = "^0.24.0"
+boto3 = "^1.34.0"
+langchain = "^0.1.0"
+langchain-aws = "^0.1.0"
+scikit-learn = "^1.3.0"
+pandas = "^2.1.0"
+numpy = "^1.24.0"
+redis = "^5.0.0"
+psycopg2-binary = "^2.9.0"
+httpx = "^0.25.0"
+python-multipart = "^0.0.6"
+python-jose = "^3.3.0"
+passlib = "^1.7.4"
+bcrypt = "^4.0.0"
+faker = "^20.0.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+pytest-asyncio = "^0.21.0"
+hypothesis = "^6.88.0"
+black = "^23.9.0"
+isort = "^5.12.0"
+flake8 = "^6.1.0"
+mypy = "^1.6.0"
+pre-commit = "^3.5.0"
+pytest-cov = "^4.1.0"
+
+[tool.poetry.group.aws.dependencies]
+aws-cdk-lib = "^2.100.0"
+constructs = "^10.3.0"
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--cov=ai_cpaas_demo",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-report=xml",
+]
+markers = [
+    "unit: Unit tests",
+    "integration: Integration tests",
+    "property: Property-based tests",
+    "aws: Tests requiring AWS services",
+    "slow: Slow running tests",
+]
+
+[tool.coverage.run]
+source = ["src"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/__pycache__/*",
+    "*/migrations/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
